@@ -1,0 +1,124 @@
+<!--
+  Reference footer. In Hyvä, port into Magento_Theme/templates/html/footer.phtml (or the footer CMS block).
+  One link per destination, no duplicated column titles, store NAP matches the store pages and Google Business Profiles.
+-->
+<footer class="bg-navy-900 text-slate-300">
+  <div class="mx-auto max-w-7xl px-4 py-12 lg:px-6 lg:py-14">
+    <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
+      <div>
+        <img src="assets/oneills-logo.png" alt="O'Neills Tyre &amp; Autocare" width="400" height="174" loading="lazy" class="h-12 w-auto brightness-0 invert">
+        <p class="mt-4 max-w-xs text-sm leading-relaxed">Family owned tyre and mechanical workshops across Newcastle, Lake Macquarie and the Hunter since 1961.</p>
+        <p class="mt-4 text-sm"><a href="mailto:info@oneillstyres.com.au" class="inline-block py-0.5 text-white hover:underline">info@oneillstyres.com.au</a></p>
+        <!-- Social: dark tiles with white marks; each tile takes its brand colour on hover and keyboard focus -->
+        <ul class="mt-5 flex gap-3">
+          <li><a href="https://www.facebook.com/ONeillsTyreAutocare/" target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white ring-1 ring-inset ring-white/10 transition duration-200 hover:bg-[#0866FF] hover:shadow-[0_8px_20px_-6px_rgba(8,102,255,0.75)] hover:ring-[#0866FF] focus-visible:bg-[#0866FF]"><span class="sr-only">O'Neills on Facebook</span><svg class="h-5 w-5" aria-hidden="true"><use href="#i-facebook"></use></svg></a></li>
+          <li><a href="https://x.com/oneillstyres" target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white ring-1 ring-inset ring-white/10 transition duration-200 hover:bg-black hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.8)] hover:ring-white/25 focus-visible:bg-black"><span class="sr-only">O'Neills on X</span><svg class="h-4 w-4" aria-hidden="true"><use href="#i-x"></use></svg></a></li>
+          <li><a href="https://www.linkedin.com/company/o-neills-tyre-autocare/" target="_blank" rel="noopener" class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-white ring-1 ring-inset ring-white/10 transition duration-200 hover:bg-[#0A66C2] hover:shadow-[0_8px_20px_-6px_rgba(10,102,194,0.8)] hover:ring-[#0A66C2] focus-visible:bg-[#0A66C2]"><span class="sr-only">O'Neills on LinkedIn</span><svg class="h-[18px] w-[18px]" aria-hidden="true"><use href="#i-linkedin"></use></svg></a></li>
+        </ul>
+      </div>
+
+      <nav aria-labelledby="f-shop">
+        <p id="f-shop" class="font-display font-bold text-white">Tyres and wheels</p>
+        <ul class="mt-4 space-y-1.5 text-sm">
+          <li><a href="/tyres" class="inline-block py-0.5 hover:text-white">All tyres</a></li>
+          <li><a href="/tyres/vehicles" class="inline-block py-0.5 hover:text-white">Tyres by vehicle</a></li>
+          <li><a href="/tyres/sizes" class="inline-block py-0.5 hover:text-white">Tyres by size</a></li>
+          <li><a href="/tyres/brand" class="inline-block py-0.5 hover:text-white">Tyres by brand</a></li>
+          <li><a href="/wheels" class="inline-block py-0.5 hover:text-white">Wheels and rims</a></li>
+          <li><a href="/services/truck-tyres" class="inline-block py-0.5 hover:text-white">Truck and bus tyres</a></li>
+          <li><a href="/services/agricultural-tyres" class="inline-block py-0.5 hover:text-white">Agricultural tyres</a></li>
+          <li><a href="/specials" class="inline-block py-0.5 hover:text-white">Specials</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="f-services">
+        <p id="f-services" class="font-display font-bold text-white">Servicing and repairs</p>
+        <ul class="mt-4 space-y-1.5 text-sm">
+          <li><a href="/services/logbook-servicing" class="inline-block py-0.5 hover:text-white">Logbook servicing</a></li>
+          <li><a href="/services/tyre-fitting" class="inline-block py-0.5 hover:text-white">Tyre fitting</a></li>
+          <li><a href="/services/wheel-alignment" class="inline-block py-0.5 hover:text-white">Wheel alignment</a></li>
+          <li><a href="/services/brakes" class="inline-block py-0.5 hover:text-white">Brake service and repair</a></li>
+          <li><a href="/services/suspension" class="inline-block py-0.5 hover:text-white">Suspension</a></li>
+          <li><a href="/services/batteries" class="inline-block py-0.5 hover:text-white">Batteries</a></li>
+          <li><a href="/services/pink-slips" class="inline-block py-0.5 hover:text-white">Pink slips</a></li>
+          <li><a href="/services" class="inline-block py-0.5 font-semibold text-white hover:underline">All services</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="f-company">
+        <p id="f-company" class="font-display font-bold text-white">Company</p>
+        <ul class="mt-4 space-y-1.5 text-sm">
+          <li><a href="/about" class="inline-block py-0.5 hover:text-white">About us</a></li>
+          <li><a href="/community" class="inline-block py-0.5 hover:text-white">Community</a></li>
+          <li><a href="/reviews" class="inline-block py-0.5 hover:text-white">Reviews</a></li>
+          <li><a href="/finance" class="inline-block py-0.5 hover:text-white">Payment options</a></li>
+          <li><a href="/faqs" class="inline-block py-0.5 hover:text-white">FAQs</a></li>
+          <li><a href="/news" class="inline-block py-0.5 hover:text-white">News</a></li>
+          <li><a href="/work-with-us" class="inline-block py-0.5 hover:text-white">Careers</a></li>
+          <li><a href="/contact" class="inline-block py-0.5 hover:text-white">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Stores -->
+    <div class="mt-12 border-t border-white/10 pt-10">
+      <p class="font-display font-bold text-white">Our stores</p>
+      <ul class="mt-5 grid gap-x-6 gap-y-5 text-sm sm:grid-cols-2 lg:grid-cols-4">
+        <li><a href="/location-belmont" class="inline-block py-0.5 font-semibold text-white hover:underline">Belmont</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Belmont&amp;query_place_id=ChIJUT1R790ic2sRBtAcSOyp2Do" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>3 Herbert St, Belmont NSW 2280<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0249454945" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4945 4945</a></li>
+        <li><a href="/location-beresfield" class="inline-block py-0.5 font-semibold text-white hover:underline">Beresfield TME</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Beresfield&amp;query_place_id=ChIJJ6tn6-VAc2sRX0xVCGpsU4Y" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>2 Babilla Cl, Beresfield NSW 2322<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0249660444" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4966 0444</a></li>
+        <li><a href="/location-broadmeadow" class="inline-block py-0.5 font-semibold text-white hover:underline">Broadmeadow</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Broadmeadow&amp;query_place_id=ChIJe1NrzL8Vc2sR_i-Q3Sa9Tv0" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>4 Newton St, Broadmeadow NSW 2292<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0240480108" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4048 0108</a></li>
+        <li><a href="/location-cessnock" class="inline-block py-0.5 font-semibold text-white hover:underline">Cessnock</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Cessnock&amp;query_place_id=ChIJla38nO40c2sRYiH7itsBNRA" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>256 Maitland Rd, Cessnock NSW 2325<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0249901455" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4990 1455</a></li>
+        <li><a href="/location-gateshead" class="inline-block py-0.5 font-semibold text-white hover:underline">Gateshead</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Gateshead&amp;query_place_id=ChIJl87sCXs9c2sRWMRP-lAldcg" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>1 Navin Cl, Gateshead NSW 2290<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0249433711" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4943 3711</a></li>
+        <li><a href="/location-kurri-kurri" class="inline-block py-0.5 font-semibold text-white hover:underline">Kurri Kurri</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Kurri%20Kurri&amp;query_place_id=ChIJGR8f_cU3c2sRZpaMIv3yCNo" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>249 Lang St, Kurri Kurri NSW 2327<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0249375288" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4937 5288</a></li>
+        <li><a href="/location-morisset" class="inline-block py-0.5 font-semibold text-white hover:underline">Morisset</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Morisset&amp;query_place_id=ChIJ56Bc_zMoc2sREeYl_lwClG0" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>36 Gateway Blvd, Morisset NSW 2264<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0249704321" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4970 4321</a></li>
+        <li><a href="/location-warners-bay" class="inline-block py-0.5 font-semibold text-white hover:underline">Warners Bay</a><a href="https://www.google.com/maps/search/?api=1&amp;query=O%27Neills%20Tyre%20%26%20Autocare%20Warners%20Bay&amp;query_place_id=ChIJAUGelLI9c2sR0d9kZBawfKE" target="_blank" rel="noopener" class="mt-1 flex items-start gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span>183 Macquarie Rd, Warners Bay NSW 2282<span class="sr-only"> (opens Google Maps)</span></span></a><a href="tel:0249567577" class="flex items-center gap-1.5 py-0.5 hover:text-white hover:underline"><svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-phone-solid"></use></svg>+61 2 4956 7577</a></li>
+      </ul>
+    </div>
+
+    <div class="mt-10 flex flex-col gap-5 border-t border-white/10 pt-6 text-xs text-slate-400 lg:flex-row lg:items-center lg:justify-between">
+      <p>&copy; 2026 O'Neills Tyre &amp; Autocare. NSW motor vehicle repairer licence <a href="https://verify.licence.nsw.gov.au/details/Motor%20Vehicle%20Repairers%20Licence/1-44OLQ4G" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-white">MVRL61864<span class="sr-only"> (check this licence on the NSW Government register, opens in a new tab)</span></a>.</p>
+      <ul class="flex flex-wrap items-center gap-2.5" aria-label="Payment options">
+        <li class="flex h-8 items-center rounded-full bg-slate-200 px-3.5"><svg class="h-[15px] w-[81px]" role="img" aria-label="Afterpay"><use href="#pay-afterpay"></use></svg></li>
+        <li class="flex h-8 items-center px-1"><svg class="h-[18px] w-[84px]" role="img" aria-label="humm"><use href="#pay-humm"></use></svg></li>
+        <li class="flex h-8 w-16 items-center justify-center rounded-md bg-slate-200"><svg class="h-[18px] w-10" role="img" aria-label="Zip"><use href="#pay-zip"></use></svg></li>
+        <li class="flex h-8 w-14 items-center justify-center rounded-md bg-slate-200"><svg class="h-[15px] w-11" role="img" aria-label="Visa"><use href="#pay-visa"></use></svg></li>
+        <li class="flex h-8 w-14 items-center justify-center rounded-md bg-slate-200"><svg class="h-6 w-10" role="img" aria-label="Mastercard"><use href="#pay-mastercard"></use></svg></li>
+      </ul>
+      <p class="flex gap-4"><a href="/privacy" class="inline-block py-0.5 hover:text-white">Privacy policy</a><a href="/terms" class="inline-block py-0.5 hover:text-white">Terms and conditions</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile sticky bar: one action, shown once the visitor scrolls past the first screen.
+     Calling lives in the sticky header (phone icon), which opens the sheet below. -->
+<div class="lg:hidden" x-data="ohSticky" @keydown.escape.window="closeSheet" @oh-open-call.window="openSheet">
+  <div class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white p-2 shadow-[0_-4px_16px_rgba(10,22,40,0.08)]"
+       x-show="barShown" x-cloak
+       x-transition:enter="transition duration-200 ease-out" x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0"
+       x-transition:leave="transition duration-150 ease-in" x-transition:leave-start="translate-y-0" x-transition:leave-end="translate-y-full">
+    <a href="https://booking.oneillstyres.com.au" class="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-3 py-3 text-base font-semibold text-white">
+      <svg class="h-5 w-5" aria-hidden="true"><use href="#i-calendar"></use></svg> Book a service
+    </a>
+  </div>
+
+  <div id="oh-call-sheet" class="fixed inset-0 z-50" x-show="sheetOpen" x-cloak role="dialog" aria-modal="true" aria-labelledby="oh-call-title">
+    <div class="absolute inset-0 bg-navy-900/60" @click="closeSheet"></div>
+    <div class="absolute inset-x-0 bottom-0 max-h-[85vh] overflow-y-auto rounded-t-2xl bg-white p-4 pb-6">
+      <div class="flex items-center justify-between">
+        <p id="oh-call-title" class="font-display text-lg font-bold text-navy-900">Call your nearest store</p>
+        <button type="button" @click="closeSheet" class="rounded-lg p-2 text-slate-600"><span class="sr-only">Close</span><svg class="h-6 w-6" aria-hidden="true"><use href="#i-close"></use></svg></button>
+      </div>
+      <ul class="mt-2 divide-y divide-slate-100">
+        <li><a href="tel:0249454945" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Belmont</span><span class="text-brand-700">(02) 4945 4945</span></a></li>
+        <li><a href="tel:0249660444" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Beresfield TME</span><span class="text-brand-700">(02) 4966 0444</span></a></li>
+        <li><a href="tel:0240480108" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Broadmeadow</span><span class="text-brand-700">(02) 4048 0108</span></a></li>
+        <li><a href="tel:0249901455" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Cessnock</span><span class="text-brand-700">(02) 4990 1455</span></a></li>
+        <li><a href="tel:0249433711" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Gateshead</span><span class="text-brand-700">(02) 4943 3711</span></a></li>
+        <li><a href="tel:0249375288" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Kurri Kurri</span><span class="text-brand-700">(02) 4937 5288</span></a></li>
+        <li><a href="tel:0249704321" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Morisset</span><span class="text-brand-700">(02) 4970 4321</span></a></li>
+        <li><a href="tel:0249567577" class="flex items-center justify-between py-3"><span class="font-semibold text-navy-900">Warners Bay</span><span class="text-brand-700">(02) 4956 7577</span></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="h-16 lg:hidden" aria-hidden="true"></div>

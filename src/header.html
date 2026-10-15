@@ -1,0 +1,157 @@
+<!--
+  Reference header. In Hyvä, port into Magento_Theme/templates/html/header.phtml (and the menu template).
+  Changes from the live header:
+  - Heart icon removed (it linked to product compare, not a wishlist).
+  - Stores and About added to the main menu. Servicing menu lists every service page.
+  - Logo: assets/oneills-logo.png (transparent PNG). In Hyvä, upload it under Content > Design > Configuration > Header > Logo.
+  - Utility bar hidden on mobile. Main header is sticky (position: sticky; top: 0).
+  - Mobile: icon-only call button in the sticky header opens the "Call your nearest store" sheet (footer.html).
+  - One header CTA only ("Book a service"). Floating Call/Text/back-to-top buttons removed.
+-->
+<!-- Utility bar (tablet and desktop only) -->
+<div class="hidden bg-navy-900 text-slate-200 md:block">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 text-xs sm:text-sm lg:px-6">
+    <p class="flex items-center gap-2">
+      <svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-store"></use></svg>
+      <span>8 stores across Newcastle, Lake Macquarie and the Hunter</span>
+    </p>
+    <p class="hidden items-center gap-2 md:flex">
+      <svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-clock"></use></svg>
+      <span>Mon to Fri 7:30am to 5pm, Sat 8am to 11:30am</span>
+    </p>
+    <a href="#stores" class="hidden py-0.5 font-semibold text-white underline-offset-4 hover:underline sm:inline-block">Find a store</a>
+  </div>
+</div>
+
+<!-- Main header: sticky on scroll (the utility bar above scrolls away) -->
+<header class="sticky top-0 z-40 bg-white" x-data="ohHeader" @keydown.escape.window="closeDrawer">
+  <!-- Main bar -->
+  <div class="border-b border-slate-200">
+    <div class="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 lg:px-6">
+      <button type="button" class="-ml-2 rounded-lg p-2 text-navy-900 lg:hidden" @click="toggleDrawer" :aria-expanded="drawerOpen" aria-controls="oh-drawer">
+        <span class="sr-only">Open menu</span>
+        <svg class="h-6 w-6" aria-hidden="true"><use href="#i-menu"></use></svg>
+      </button>
+
+      <a href="/" class="shrink-0" aria-label="O'Neills Tyre &amp; Autocare home">
+        <img src="assets/oneills-logo.png" alt="O'Neills Tyre &amp; Autocare" width="400" height="174" class="h-10 w-auto sm:h-12 lg:h-10 xl:h-12">
+      </a>
+
+      <nav class="ml-3 hidden flex-1 lg:block xl:ml-6" aria-label="Main">
+        <ul class="flex items-center gap-0.5 whitespace-nowrap text-sm font-medium text-slate-800 xl:gap-1 xl:text-[15px]">
+          <li class="group relative">
+            <a href="/tyres" class="flex items-center gap-1 rounded-lg px-2 py-2 hover:bg-slate-100 hover:text-brand-700 xl:px-3">Tyres <svg class="h-4 w-4 text-slate-500" aria-hidden="true"><use href="#i-chevron-down"></use></svg></a>
+            <div class="invisible absolute left-0 top-full w-64 translate-y-1 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <a href="/tyres/vehicles" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Tyres by vehicle</a>
+              <a href="/tyres/sizes" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Tyres by size</a>
+              <a href="/tyres/brand" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Tyres by brand</a>
+              <a href="/services/truck-tyres" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Truck and bus tyres</a>
+              <a href="/services/agricultural-tyres" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Agricultural tyres</a>
+              <a href="/tyres" class="mt-1 block rounded-lg border-t border-slate-100 px-3 py-2 font-semibold text-brand-700 hover:bg-brand-50">All tyres</a>
+            </div>
+          </li>
+          <li class="group relative">
+            <a href="/wheels" class="flex items-center gap-1 rounded-lg px-2 py-2 hover:bg-slate-100 hover:text-brand-700 xl:px-3">Wheels <svg class="h-4 w-4 text-slate-500" aria-hidden="true"><use href="#i-chevron-down"></use></svg></a>
+            <div class="invisible absolute left-0 top-full w-56 translate-y-1 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <a href="/wheels/sizes" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Wheels by size</a>
+              <a href="/wheels/brand" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Wheels by brand</a>
+              <a href="/wheels" class="mt-1 block rounded-lg border-t border-slate-100 px-3 py-2 font-semibold text-brand-700 hover:bg-brand-50">All wheels</a>
+            </div>
+          </li>
+          <li class="group relative">
+            <a href="/services" class="flex items-center gap-1 rounded-lg px-2 py-2 hover:bg-slate-100 hover:text-brand-700 xl:px-3">Servicing &amp; repairs <svg class="h-4 w-4 text-slate-500" aria-hidden="true"><use href="#i-chevron-down"></use></svg></a>
+            <div class="invisible absolute left-0 top-full grid w-[34rem] translate-y-1 grid-cols-2 gap-x-2 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <a href="/services/logbook-servicing" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Logbook servicing</a>
+              <a href="/services/tyre-fitting" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Tyre fitting</a>
+              <a href="/services/mechanical-repairs" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Mechanical repairs</a>
+              <a href="/services/wheel-alignment" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Wheel alignment</a>
+              <a href="/services/brakes" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Brake service and repair</a>
+              <a href="/services/wheel-balancing" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Wheel balancing</a>
+              <a href="/services/suspension" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Suspension</a>
+              <a href="/services/puncture-repair" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Puncture repairs</a>
+              <a href="/services/steering-repairs" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Steering repairs</a>
+              <a href="/services/tpms-servicing" class="block rounded-lg px-3 py-2 hover:bg-brand-50">TPMS servicing</a>
+              <a href="/services/batteries" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Batteries</a>
+              <a href="/services/pink-slips" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Pink slips</a>
+              <a href="/services/engine-repairs" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Engine repairs</a>
+              <a href="/services/safety-checks" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Safety checks</a>
+              <a href="/services/belts-hoses" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Belts and hoses</a>
+              <a href="/services/4wd-accessories" class="block rounded-lg px-3 py-2 hover:bg-brand-50">4WD accessories</a>
+              <a href="/services/wiper-replacement" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Wiper replacement</a>
+              <a href="/services/4wd-lift-kits" class="block rounded-lg px-3 py-2 hover:bg-brand-50">4WD suspension and lift kits</a>
+              <a href="/services" class="col-span-2 mt-1 block rounded-lg border-t border-slate-100 px-3 py-2 font-semibold text-brand-700 hover:bg-brand-50">All servicing and repairs</a>
+            </div>
+          </li>
+          <li class="group relative">
+            <a href="#stores" class="flex items-center gap-1 rounded-lg px-2 py-2 hover:bg-slate-100 hover:text-brand-700 xl:px-3">Stores <svg class="h-4 w-4 text-slate-500" aria-hidden="true"><use href="#i-chevron-down"></use></svg></a>
+            <div class="invisible absolute left-0 top-full grid w-[26rem] translate-y-1 grid-cols-2 rounded-2xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              <a href="/location-belmont" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Belmont</a>
+              <a href="/location-beresfield" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Beresfield TME</a>
+              <a href="/location-broadmeadow" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Broadmeadow</a>
+              <a href="/location-cessnock" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Cessnock</a>
+              <a href="/location-gateshead" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Gateshead</a>
+              <a href="/location-kurri-kurri" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Kurri Kurri</a>
+              <a href="/location-morisset" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Morisset</a>
+              <a href="/location-warners-bay" class="block rounded-lg px-3 py-2 hover:bg-brand-50">Warners Bay</a>
+            </div>
+          </li>
+          <li><a href="/specials" class="block rounded-lg px-2 py-2 hover:bg-slate-100 hover:text-brand-700 xl:px-3">Specials</a></li>
+          <li><a href="/about" class="block rounded-lg px-2 py-2 hover:bg-slate-100 hover:text-brand-700 xl:px-3">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="ml-auto flex items-center gap-1">
+        <button type="button" @click="openCall" class="mr-1 flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-white shadow-sm hover:bg-brand-700 lg:hidden" aria-haspopup="dialog" aria-controls="oh-call-sheet">
+          <span class="sr-only">Call a store</span><svg class="h-5 w-5" aria-hidden="true"><use href="#i-phone"></use></svg>
+        </button>
+        <a href="/catalogsearch/result" class="rounded-lg p-1.5 text-slate-700 hover:bg-slate-100 hover:text-brand-700 sm:p-2 lg:p-1.5 xl:p-2"><span class="sr-only">Search</span><svg class="h-6 w-6" aria-hidden="true"><use href="#i-search"></use></svg></a>
+        <a href="/customer/account" class="hidden rounded-lg p-2 text-slate-700 hover:bg-slate-100 hover:text-brand-700 sm:block lg:p-1.5 xl:p-2"><span class="sr-only">My account</span><svg class="h-6 w-6" aria-hidden="true"><use href="#i-user"></use></svg></a>
+        <!-- Favourites: Magento wish list. Only show if the wish list is enabled and products have "Add to favourites". -->
+        <a href="/wishlist" class="rounded-lg p-1.5 text-slate-700 hover:bg-slate-100 hover:text-brand-700 sm:p-2 lg:p-1.5 xl:p-2"><span class="sr-only">Favourites</span><svg class="h-6 w-6" aria-hidden="true"><use href="#i-heart"></use></svg></a>
+        <a href="/checkout/cart" class="rounded-lg p-1.5 text-slate-700 hover:bg-slate-100 hover:text-brand-700 sm:p-2 lg:p-1.5 xl:p-2"><span class="sr-only">Cart</span><svg class="h-6 w-6" aria-hidden="true"><use href="#i-cart"></use></svg></a>
+        <a href="https://booking.oneillstyres.com.au" class="ml-2 hidden whitespace-nowrap rounded-xl bg-brand-600 lg:ml-1 xl:ml-2 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-700 lg:inline-flex">Book a service</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div id="oh-drawer" class="fixed inset-0 z-50 lg:hidden" x-show="drawerOpen" x-cloak>
+    <div class="absolute inset-0 bg-navy-900/60" @click="closeDrawer"></div>
+    <nav class="absolute inset-y-0 left-0 flex w-[86%] max-w-sm flex-col overflow-y-auto bg-white" aria-label="Mobile">
+      <div class="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+        <img src="assets/oneills-logo.png" alt="O'Neills Tyre &amp; Autocare" width="400" height="174" class="h-10 w-auto">
+        <button type="button" class="rounded-lg p-2 text-navy-900" @click="closeDrawer"><span class="sr-only">Close menu</span><svg class="h-6 w-6" aria-hidden="true"><use href="#i-close"></use></svg></button>
+      </div>
+      <div class="divide-y divide-slate-100 text-base font-medium text-slate-800">
+        <details class="group px-4 py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between py-3">Tyres <svg class="h-5 w-5 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <div class="grid gap-1 pb-3 pl-2 text-[15px] font-normal">
+            <a href="/tyres/vehicles" class="py-1.5">Tyres by vehicle</a><a href="/tyres/sizes" class="py-1.5">Tyres by size</a><a href="/tyres/brand" class="py-1.5">Tyres by brand</a><a href="/services/truck-tyres" class="py-1.5">Truck and bus tyres</a><a href="/services/agricultural-tyres" class="py-1.5">Agricultural tyres</a><a href="/tyres" class="py-1.5 font-semibold text-brand-700">All tyres</a>
+          </div>
+        </details>
+        <details class="group px-4 py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between py-3">Wheels <svg class="h-5 w-5 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <div class="grid gap-1 pb-3 pl-2 text-[15px] font-normal">
+            <a href="/wheels/sizes" class="py-1.5">Wheels by size</a><a href="/wheels/brand" class="py-1.5">Wheels by brand</a><a href="/wheels" class="py-1.5 font-semibold text-brand-700">All wheels</a>
+          </div>
+        </details>
+        <details class="group px-4 py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between py-3">Servicing &amp; repairs <svg class="h-5 w-5 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <div class="grid gap-1 pb-3 pl-2 text-[15px] font-normal">
+            <a href="/services/logbook-servicing" class="py-1.5">Logbook servicing</a><a href="/services/tyre-fitting" class="py-1.5">Tyre fitting</a><a href="/services/wheel-alignment" class="py-1.5">Wheel alignment</a><a href="/services/brakes" class="py-1.5">Brake service and repair</a><a href="/services/suspension" class="py-1.5">Suspension</a><a href="/services/batteries" class="py-1.5">Batteries</a><a href="/services/pink-slips" class="py-1.5">Pink slips</a><a href="/services" class="py-1.5 font-semibold text-brand-700">All servicing and repairs</a>
+          </div>
+        </details>
+        <details class="group px-4 py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between py-3">Stores <svg class="h-5 w-5 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <div class="grid grid-cols-2 gap-1 pb-3 pl-2 text-[15px] font-normal">
+            <a href="/location-belmont" class="py-1.5">Belmont</a><a href="/location-beresfield" class="py-1.5">Beresfield TME</a><a href="/location-broadmeadow" class="py-1.5">Broadmeadow</a><a href="/location-cessnock" class="py-1.5">Cessnock</a><a href="/location-gateshead" class="py-1.5">Gateshead</a><a href="/location-kurri-kurri" class="py-1.5">Kurri Kurri</a><a href="/location-morisset" class="py-1.5">Morisset</a><a href="/location-warners-bay" class="py-1.5">Warners Bay</a>
+          </div>
+        </details>
+        <a href="/specials" class="block px-4 py-4">Specials</a>
+        <a href="/about" class="block px-4 py-4">About</a>
+        <a href="/wishlist" class="flex items-center gap-3 px-4 py-4"><svg class="h-5 w-5 text-slate-500" aria-hidden="true"><use href="#i-heart"></use></svg>Favourites</a>
+        <a href="/customer/account" class="flex items-center gap-3 px-4 py-4"><svg class="h-5 w-5 text-slate-500" aria-hidden="true"><use href="#i-user"></use></svg>My account</a>
+      </div>
+    </nav>
+  </div>
+</header>

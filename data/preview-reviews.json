@@ -1,0 +1,235 @@
+{
+  "_note": "PREVIEW ONLY. Sample cards so the layout can be reviewed. Not real reviews; never deploy. The live feed must return real Google reviews (see DEV-NOTES).",
+  "broadmeadow": [
+    {
+      "id": "broadmeadow-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Broadmeadow load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "broadmeadow-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Broadmeadow load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "broadmeadow-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Broadmeadow load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ],
+  "beresfield": [
+    {
+      "id": "beresfield-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Beresfield TME load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "beresfield-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Beresfield TME load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "beresfield-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Beresfield TME load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ],
+  "gateshead": [
+    {
+      "id": "gateshead-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Gateshead load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "gateshead-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Gateshead load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "gateshead-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Gateshead load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ],
+  "warnersBay": [
+    {
+      "id": "warnersBay-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Warners Bay load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "warnersBay-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Warners Bay load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "warnersBay-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Warners Bay load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ],
+  "belmont": [
+    {
+      "id": "belmont-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Belmont load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "belmont-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Belmont load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "belmont-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Belmont load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ],
+  "morisset": [
+    {
+      "id": "morisset-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Morisset load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "morisset-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Morisset load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "morisset-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Morisset load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ],
+  "kurriKurri": [
+    {
+      "id": "kurriKurri-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Kurri Kurri load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "kurriKurri-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Kurri Kurri load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "kurriKurri-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Kurri Kurri load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ],
+  "cessnock": [
+    {
+      "id": "cessnock-1",
+      "author": "Sample reviewer 1",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Cessnock load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "cessnock-2",
+      "author": "Sample reviewer 2",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Cessnock load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    },
+    {
+      "id": "cessnock-3",
+      "author": "Sample reviewer 3",
+      "authorUrl": null,
+      "photo": "",
+      "rating": 5,
+      "text": "Sample card for the layout preview. The latest Google reviews for O'Neills Cessnock load here from its Google Business Profile once the reviews feed is connected.",
+      "when": "preview"
+    }
+  ]
+}

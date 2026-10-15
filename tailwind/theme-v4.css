@@ -1,0 +1,21 @@
+/* Brand tokens for Tailwind v4 (Hyvä 1.4+). Add to the theme's main CSS after @import "tailwindcss". */
+@theme {
+  --color-brand-50: #EEF4FC;
+  --color-brand-100: #D9E6F8;
+  --color-brand-200: #B3CDF0;
+  --color-brand-300: #82ACE4;
+  --color-brand-400: #4F86D3;
+  --color-brand-500: #2A6CC4;
+  --color-brand-600: #1A5FB4;
+  --color-brand-700: #154D93;
+  --color-brand-800: #123F77;
+  --color-brand-900: #0F335F;
+  --color-navy-700: #1A2D42;
+  --color-navy-800: #0F1D2E;
+  --color-navy-900: #0A1628;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, sans-serif;
+}
+
+/* Hide Alpine-controlled elements until Alpine starts (Hyvä already ships this rule). */
+[x-cloak] { display: none !important; }

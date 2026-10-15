@@ -1,0 +1,522 @@
+<!-- Homepage structured data. Output in <head> (or before </body>) on the homepage only.
+     No aggregateRating: Google does not allow self-serving or third-party aggregated review markup. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AutomotiveBusiness",
+      "@id": "https://oneillstyres.com.au/#organization",
+      "name": "O'Neills Tyre & Autocare",
+      "url": "https://oneillstyres.com.au/",
+      "logo": "https://oneillstyres.com.au/media/logo/default/oneills_logo_1.jpg",
+      "email": "info@oneillstyres.com.au",
+      "foundingDate": "1961",
+      "slogan": "If you've got wheels, you need O'Neills",
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Newcastle"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Lake Macquarie"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hunter Region"
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/ONeillsTyreAutocare/",
+        "https://x.com/oneillstyres",
+        "https://www.linkedin.com/company/o-neills-tyre-autocare/"
+      ],
+      "subOrganization": [
+        {
+          "@id": "https://oneillstyres.com.au/location-belmont#store"
+        },
+        {
+          "@id": "https://oneillstyres.com.au/location-beresfield#store"
+        },
+        {
+          "@id": "https://oneillstyres.com.au/location-broadmeadow#store"
+        },
+        {
+          "@id": "https://oneillstyres.com.au/location-cessnock#store"
+        },
+        {
+          "@id": "https://oneillstyres.com.au/location-gateshead#store"
+        },
+        {
+          "@id": "https://oneillstyres.com.au/location-kurri-kurri#store"
+        },
+        {
+          "@id": "https://oneillstyres.com.au/location-morisset#store"
+        },
+        {
+          "@id": "https://oneillstyres.com.au/location-warners-bay#store"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://oneillstyres.com.au/#website",
+      "url": "https://oneillstyres.com.au/",
+      "name": "O'Neills Tyre & Autocare",
+      "inLanguage": "en-AU",
+      "publisher": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://oneillstyres.com.au/catalogsearch/result/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-belmont#store",
+      "name": "O'Neills Tyre & Autocare Belmont",
+      "url": "https://oneillstyres.com.au/location-belmont",
+      "telephone": "+61249454945",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "3 Herbert St",
+        "addressLocality": "Belmont",
+        "addressRegion": "NSW",
+        "postalCode": "2280",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJUT1R790ic2sRBtAcSOyp2Do",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "11:30"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-beresfield#store",
+      "name": "O'Neills Tyre & Autocare Beresfield TME",
+      "url": "https://oneillstyres.com.au/location-beresfield",
+      "telephone": "+61249660444",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2 Babilla Cl",
+        "addressLocality": "Beresfield",
+        "addressRegion": "NSW",
+        "postalCode": "2322",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJJ6tn6-VAc2sRX0xVCGpsU4Y",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "07:30",
+          "closes": "11:30"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-broadmeadow#store",
+      "name": "O'Neills Tyre & Autocare Broadmeadow",
+      "url": "https://oneillstyres.com.au/location-broadmeadow",
+      "telephone": "+61240480108",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "alternateName": "Broadmeadow Tyres Newcastle",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4 Newton St",
+        "addressLocality": "Broadmeadow",
+        "addressRegion": "NSW",
+        "postalCode": "2292",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJe1NrzL8Vc2sR_i-Q3Sa9Tv0",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "12:00"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-cessnock#store",
+      "name": "O'Neills Tyre & Autocare Cessnock",
+      "url": "https://oneillstyres.com.au/location-cessnock",
+      "telephone": "+61249901455",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "256 Maitland Rd",
+        "addressLocality": "Cessnock",
+        "addressRegion": "NSW",
+        "postalCode": "2325",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJla38nO40c2sRYiH7itsBNRA",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "11:30"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-gateshead#store",
+      "name": "O'Neills Tyre & Autocare Gateshead",
+      "url": "https://oneillstyres.com.au/location-gateshead",
+      "telephone": "+61249433711",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1 Navin Cl",
+        "addressLocality": "Gateshead",
+        "addressRegion": "NSW",
+        "postalCode": "2290",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJl87sCXs9c2sRWMRP-lAldcg",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "11:30"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-kurri-kurri#store",
+      "name": "O'Neills Tyre & Autocare Kurri Kurri",
+      "url": "https://oneillstyres.com.au/location-kurri-kurri",
+      "telephone": "+61249375288",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "249 Lang St",
+        "addressLocality": "Kurri Kurri",
+        "addressRegion": "NSW",
+        "postalCode": "2327",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJGR8f_cU3c2sRZpaMIv3yCNo",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "11:30"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-morisset#store",
+      "name": "O'Neills Tyre & Autocare Morisset",
+      "url": "https://oneillstyres.com.au/location-morisset",
+      "telephone": "+61249704321",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "alternateName": "Morisset Batteries",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "36 Gateway Blvd",
+        "addressLocality": "Morisset",
+        "addressRegion": "NSW",
+        "postalCode": "2264",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJ56Bc_zMoc2sREeYl_lwClG0",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "11:30"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": [
+        "TireShop",
+        "AutoRepair"
+      ],
+      "@id": "https://oneillstyres.com.au/location-warners-bay#store",
+      "name": "O'Neills Tyre & Autocare Warners Bay",
+      "url": "https://oneillstyres.com.au/location-warners-bay",
+      "telephone": "+61249567577",
+      "image": "https://oneillstyres.com.au/media/wysiwyg/meetanshi/images/New.webp",
+      "parentOrganization": {
+        "@id": "https://oneillstyres.com.au/#organization"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "183 Macquarie Rd",
+        "addressLocality": "Warners Bay",
+        "addressRegion": "NSW",
+        "postalCode": "2282",
+        "addressCountry": "AU"
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJAUGelLI9c2sR0d9kZBawfKE",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "07:30",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "08:00",
+          "closes": "11:30"
+        }
+      ],
+      "paymentAccepted": "Cash, Credit Card, EFTPOS, Afterpay, Zip, Humm",
+      "currenciesAccepted": "AUD",
+      "priceRange": "$$"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://oneillstyres.com.au/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What's included when I buy tyres from O'Neills?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fitting, standard wheel balancing and new valves are included at no extra cost. Wheel alignment is a separate service, and we recommend it with every new set."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does tyre fitting take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Around 30 to 45 minutes for a set of four, including balancing and a safety check. Allow extra time if you add a wheel alignment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When do my tyres need replacing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The legal minimum tread depth in NSW is 1.5mm, which is level with the tread wear indicators in the grooves. Replace tyres sooner if you see cracks, bulges or uneven wear, and have tyres older than 5 years checked even if the tread looks fine."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will a logbook service at O'Neills affect my new car warranty?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Under Australian Consumer Law you don't need to service at the dealer. Your warranty stays valid when a qualified mechanic follows the manufacturer's schedule using parts of suitable quality, and we record every service in your logbook."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I pay for tyres in instalments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can pay with Afterpay, Zip or Humm, as well as Visa, Mastercard, American Express, EFTPOS and cash. See payment options for details."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you fit truck, earthmover and farm tyres?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our Beresfield TME store at 2 Babilla Cl, Beresfield handles truck, bus, earthmover, forklift and tractor tyres. Call (02) 4966 0444."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a pink slip at O'Neills?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, at selected stores including Kurri Kurri. In NSW, cars more than five years old need a pink slip (eSafety inspection) within 42 days before rego renewal. Call your nearest store to check it offers pink slips and book a time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between a pink slip and a blue slip?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A pink slip is the yearly safety check for registration renewal. A blue slip (AUVIS inspection) is needed to register a vehicle that is unregistered, coming from interstate or has been modified. Blue slips are available at our Belmont, Cessnock and Kurri Kurri stores."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

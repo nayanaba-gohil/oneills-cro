@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+  Homepage layout for the Hyvä child theme: app/design/frontend/<Vendor>/<theme>/Magento_Cms/layout/cms_index_index.xml
+  Leave the homepage CMS page content empty; title and meta description stay in the CMS page settings.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="oneills.homepage"
+                   template="Magento_Cms::home/homepage.phtml"
+                   before="-">
+                <!-- Dev: replace with the block/view model that already outputs the tyre size combinations JSON -->
+                <arguments>
+                    <argument name="tyre_size_combinations" xsi:type="string"></argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

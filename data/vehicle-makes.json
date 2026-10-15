@@ -1,0 +1,407 @@
+[
+  {
+    "name": "Abarth",
+    "slug": "abarth",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/abarth-1762777209.3460367.png"
+  },
+  {
+    "name": "Aion",
+    "slug": "aion",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/aion-1790839082.1451519.png"
+  },
+  {
+    "name": "Alfa Romeo",
+    "slug": "alfa-romeo",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/alfa-romeo-1622187497.0561097.png"
+  },
+  {
+    "name": "Alpine",
+    "slug": "alpine",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/alpine-1622187509.1047068.png"
+  },
+  {
+    "name": "Aston Martin",
+    "slug": "aston-martin",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/aston-martin-1622187548.7074096.png"
+  },
+  {
+    "name": "Audi",
+    "slug": "audi",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/audi-1632743135.9018078.png"
+  },
+  {
+    "name": "Bentley",
+    "slug": "bentley",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/bentley-1622187696.6171503.png"
+  },
+  {
+    "name": "BMW",
+    "slug": "bmw",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/bmw-1632742904.5706592.png"
+  },
+  {
+    "name": "BMW Alpina",
+    "slug": "bmw-alpina",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/bmw-alpina-1622187718.9726026.png"
+  },
+  {
+    "name": "BYD",
+    "slug": "byd",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/byd-1718645881.282391.png"
+  },
+  {
+    "name": "Cadillac",
+    "slug": "cadillac",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/cadillac-1622187853.7133439.png"
+  },
+  {
+    "name": "Chery",
+    "slug": "chery",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/chery-1622187875.123182.png"
+  },
+  {
+    "name": "Citroën",
+    "slug": "citroen",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/citroen-1698158436.5804582.png"
+  },
+  {
+    "name": "Cupra",
+    "slug": "cupra",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/cupra-1622188035.655218.png"
+  },
+  {
+    "name": "Daihatsu",
+    "slug": "daihatsu",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/daihatsu-1622188066.036895.png"
+  },
+  {
+    "name": "Datsun",
+    "slug": "datsun",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/datsun-1622188074.3245099.png"
+  },
+  {
+    "name": "Deepal",
+    "slug": "deepal",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/deepal-1718640381.1259632.png"
+  },
+  {
+    "name": "Denza",
+    "slug": "denza",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/denza-1622188082.516713.png"
+  },
+  {
+    "name": "Dodge",
+    "slug": "dodge",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/dodge-1663218424.6866808.png"
+  },
+  {
+    "name": "DS",
+    "slug": "ds",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ds-1622188121.3844934.png"
+  },
+  {
+    "name": "Ferrari",
+    "slug": "ferrari",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ferrari-1622188446.4694815.png"
+  },
+  {
+    "name": "Fiat",
+    "slug": "fiat",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/fiat-1698158266.346683.png"
+  },
+  {
+    "name": "Ford",
+    "slug": "ford",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ford-1622188633.2006207.png"
+  },
+  {
+    "name": "Foton",
+    "slug": "foton",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/foton-1622188650.8366506.png"
+  },
+  {
+    "name": "Geely",
+    "slug": "geely",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/geely-1622188745.4011102.png"
+  },
+  {
+    "name": "Genesis",
+    "slug": "genesis",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/genesis-1622188756.2003286.png"
+  },
+  {
+    "name": "GMC",
+    "slug": "gmc",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/gmc-1663218719.169733.png"
+  },
+  {
+    "name": "Great Wall (GWM)",
+    "slug": "great-wall",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/great-wall-1622195923.3004434.png"
+  },
+  {
+    "name": "Haval",
+    "slug": "haval",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/haval-1622195944.8729687.png"
+  },
+  {
+    "name": "Holden",
+    "slug": "holden",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/holden-1622195980.0994718.png"
+  },
+  {
+    "name": "Honda",
+    "slug": "honda",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/honda-1622195990.98031.png"
+  },
+  {
+    "name": "Hyundai",
+    "slug": "hyundai",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/hyundai-1622196052.2252924.png"
+  },
+  {
+    "name": "Ineos",
+    "slug": "ineos",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ineos-1698155334.1132197.png"
+  },
+  {
+    "name": "Isuzu",
+    "slug": "isuzu",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/isuzu-1622196799.599329.png"
+  },
+  {
+    "name": "Iveco",
+    "slug": "iveco",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/iveco-1622196845.7171133.png"
+  },
+  {
+    "name": "JAC",
+    "slug": "jac",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/jac-1762777176.3924992.png"
+  },
+  {
+    "name": "Jaecoo",
+    "slug": "jaecoo",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/jaecoo-1698155378.2273355.png"
+  },
+  {
+    "name": "Jaguar",
+    "slug": "jaguar",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/jaguar-1622196873.7070992.png"
+  },
+  {
+    "name": "Jeep",
+    "slug": "jeep",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/jeep-1622196898.1454594.png"
+  },
+  {
+    "name": "KGM",
+    "slug": "kg-mobility",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/kg-mobility-1718640290.0037389.png"
+  },
+  {
+    "name": "Kia",
+    "slug": "kia",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/kia-1649661517.5593028.png"
+  },
+  {
+    "name": "Lamborghini",
+    "slug": "lamborghini",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/lamborghini-1622197030.3850188.png"
+  },
+  {
+    "name": "Land Rover",
+    "slug": "land-rover",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/land-rover-1622197056.750649.png"
+  },
+  {
+    "name": "LDV",
+    "slug": "ldv",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ldv-1622197078.2540147.png"
+  },
+  {
+    "name": "Leapmotor",
+    "slug": "leapmotor",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/leapmotor-1698168765.2047434.png"
+  },
+  {
+    "name": "Lexus",
+    "slug": "lexus",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/lexus-1622197096.94669.png"
+  },
+  {
+    "name": "Lotus",
+    "slug": "lotus",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/lotus-1698156541.2480235.png"
+  },
+  {
+    "name": "Mahindra",
+    "slug": "mahindra",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mahindra-1622277055.063834.png"
+  },
+  {
+    "name": "Maserati",
+    "slug": "maserati",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/maserati-1622277092.2098749.png"
+  },
+  {
+    "name": "Mazda",
+    "slug": "mazda",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mazda-1622277136.7289732.png"
+  },
+  {
+    "name": "McLaren",
+    "slug": "mclaren",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mclaren-1622277150.9167163.png"
+  },
+  {
+    "name": "Mercedes-Benz",
+    "slug": "mercedes",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mercedes-1622277161.2897472.png"
+  },
+  {
+    "name": "Mercedes-Maybach",
+    "slug": "mercedes-maybach",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mercedes-maybach-1622277202.2358077.png"
+  },
+  {
+    "name": "MG",
+    "slug": "mg",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mg-1790839259.813741.png"
+  },
+  {
+    "name": "MINI",
+    "slug": "mini",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mini-1632743189.200076.png"
+  },
+  {
+    "name": "Mitsubishi",
+    "slug": "mitsubishi",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/mitsubishi-1622277272.6303375.png"
+  },
+  {
+    "name": "Nissan",
+    "slug": "nissan",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/nissan-1632742769.6952765.png"
+  },
+  {
+    "name": "Omoda",
+    "slug": "omoda",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/omoda-1698155500.8203485.png"
+  },
+  {
+    "name": "Opel",
+    "slug": "opel",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/opel-1622277370.747172.png"
+  },
+  {
+    "name": "Ora",
+    "slug": "ora",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ora-1663181942.2019138.png"
+  },
+  {
+    "name": "Peugeot",
+    "slug": "peugeot",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/peugeot-1762777101.6515338.png"
+  },
+  {
+    "name": "Polaris",
+    "slug": "polaris",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/polaris-1622277432.5149715.png"
+  },
+  {
+    "name": "Polestar",
+    "slug": "polestar",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/polestar-1622279754.559016.png"
+  },
+  {
+    "name": "Porsche",
+    "slug": "porsche",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/porsche-1622277491.5094388.png"
+  },
+  {
+    "name": "Proton",
+    "slug": "proton",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/proton-1622277503.619904.png"
+  },
+  {
+    "name": "Ram",
+    "slug": "ram",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ram-1622277547.281054.png"
+  },
+  {
+    "name": "Renault",
+    "slug": "renault",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/renault-1632742415.1332035.png"
+  },
+  {
+    "name": "Rover",
+    "slug": "rover",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/rover-1622277727.714641.png"
+  },
+  {
+    "name": "Seat",
+    "slug": "seat",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/seat-1762777049.350417.png"
+  },
+  {
+    "name": "Skoda",
+    "slug": "skoda",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/skoda-1622277801.922566.png"
+  },
+  {
+    "name": "Smart",
+    "slug": "smart",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/smart-1622277810.8477619.png"
+  },
+  {
+    "name": "SsangYong",
+    "slug": "ssangyong",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/ssangyong-1622277892.3065999.png"
+  },
+  {
+    "name": "Subaru",
+    "slug": "subaru",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/subaru-1622277902.5535758.png"
+  },
+  {
+    "name": "Suzuki",
+    "slug": "suzuki",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/suzuki-1622277914.6690109.png"
+  },
+  {
+    "name": "Tank",
+    "slug": "tank",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/tank-1698157803.3300061.png"
+  },
+  {
+    "name": "Tesla",
+    "slug": "tesla",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/tesla-1622277957.4683545.png"
+  },
+  {
+    "name": "Toyota",
+    "slug": "toyota",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/toyota-1632743807.0095704.png"
+  },
+  {
+    "name": "Triumph",
+    "slug": "triumph",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/triumph-1736775672.5478556.png"
+  },
+  {
+    "name": "Volkswagen",
+    "slug": "volkswagen",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/volkswagen-1632743087.163763.png"
+  },
+  {
+    "name": "Volvo",
+    "slug": "volvo",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/volvo-1718646352.5219266.png"
+  },
+  {
+    "name": "Zeekr",
+    "slug": "zeekr",
+    "logo": "https://cdn.wheel-size.com/automobile/manufacturer/zeekr-1663156129.567872.png"
+  }
+]
