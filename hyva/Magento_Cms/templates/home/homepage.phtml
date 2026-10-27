@@ -1264,6 +1264,44 @@ declare(strict_types=1);
       };
     });
 
+    // Promotions bar under the navigation: slides marked data-promo rotate every data-interval ms (default 5000).
+    // Pauses while hovered or focused, with the pause button, and when the tab is hidden; reduced motion starts paused.
+    Alpine.data('ohPromo', function () {
+      var timer = null;
+      return {
+        index: 0, count: 0, playing: true, held: false, ms: 5000,
+        init: function () {
+          this.count = this.$el.querySelectorAll('[data-promo]').length;
+          this.ms = parseInt(this.$el.dataset.interval, 10) || 5000;
+          if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { this.playing = false; }
+          this.restart();
+        },
+        restart: function () {
+          var self = this;
+          if (timer) { clearInterval(timer); }
+          timer = setInterval(function () {
+            if (self.playing && !self.held && self.count > 1 && document.visibilityState === 'visible') {
+              self.index = (self.index + 1) % self.count;
+            }
+          }, this.ms);
+        },
+        map: function (on, off) {
+          var c = this.index, o = {};
+          for (var i = 0; i < this.count; i++) { o['s' + i] = i === c ? on : off; }
+          return o;
+        },
+        get shown() { return this.map(true, false); },
+        get current() { return this.map('true', null); },
+        get dotCls() { return this.map('bg-navy-900', 'bg-slate-400'); },
+        get paused() { return !this.playing; },
+        get toggleLabel() { return this.playing ? 'Pause offers' : 'Play offers'; },
+        go: function (e) { this.index = parseInt(e.currentTarget.dataset.slide, 10) || 0; this.restart(); },
+        toggle: function () { this.playing = !this.playing; this.restart(); },
+        hold: function () { this.held = true; },
+        release: function () { this.held = false; }
+      };
+    });
+
     // Hero finder: Buy Tyres / Buy Wheels, each by size or by vehicle
     Alpine.data('ohFinder', function () {
       return {

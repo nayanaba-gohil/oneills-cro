@@ -16,9 +16,9 @@
 | `hyva/Magento_Cms/templates/home/homepage.phtml` | Ready-made Hyvä template: homepage body + components (registered with `$hyvaCsp`) + JSON-LD. Generated from `src/` and `js/` | `app/design/frontend/<Vendor>/<theme>/Magento_Cms/templates/home/` |
 | `hyva/Magento_Cms/layout/cms_index_index.xml` | Adds the template to the homepage `content` container | `app/design/frontend/<Vendor>/<theme>/Magento_Cms/layout/` |
 | `src/oneills_logo_1.png` | Transparent logo (400x174) | Content > Design > Configuration > Header > Logo. The footer reuses it as white with `brightness-0 invert` |
-| `preview.html` | Single-file preview (Tailwind Play CDN + Alpine CDN) | Reference only. Do not deploy |
+| `index.html` | Single-file preview (Tailwind Play CDN + Alpine CDN), published on GitHub Pages (`nayanaba-gohil.github.io/oneills-cro`) | Reference only. Do not deploy to Magento |
 
-The hero photo and the card photos in sections 2 and 2b are free Unsplash photos used as placeholders (see below). The other images are referenced from `oneillstyres.com.au/media/...`. Cloudflare blocks them on any other domain, so they show as broken in `preview.html` opened locally. They will load on the live domain.
+The hero photo and the card photos in sections 2 and 2b are free Unsplash photos used as placeholders (see below). The other images are referenced from `oneillstyres.com.au/media/...`. Cloudflare blocks them on any other domain, so they show as broken in `index.html` opened locally. They will load on the live domain.
 
 ## Assets (homepage/assets)
 
@@ -42,7 +42,7 @@ Store addresses in the footer link to each store's Google Maps listing by place 
 ## Integration steps
 
 1. Add the brand tokens (`brand-*`, `navy-*`, `font-display`). Add the homepage template folder to Tailwind `content` so the classes compile. Rebuild CSS.
-2. Load fonts: Inter 400/500/600/700 and Space Grotesk 500/700. Self-host them, or preload from Google Fonts.
+2. Load fonts: Inter 400/500/600/700 and Space Grotesk 500/700. These are the fonts the live site uses today (Inter for text, Space Grotesk for headings; checked 27 Oct 2026). The O'Neills logo lettering is an image, not a web font. Self-host them, or preload from Google Fonts.
 3. Output `icons.html` once sitewide.
 4. Copy `hyva/Magento_Cms/` into the child theme and empty the homepage CMS page content. The template outputs a `<div>`, not `<main id="maincontent">`, because Hyvä's page layout already renders that element. Every Alpine attribute uses CSP-safe syntax: only property names, getters and argument-free methods.
 5. The template already includes the components (`js/oneills-home.js`, registered with `$hyvaCsp->registerInlineScript()`) and the JSON-LD.
@@ -55,7 +55,7 @@ Store addresses in the footer link to each store's Google Maps listing by place 
 - **Locale:** set Stores > Configuration > General > Locale to **English (Australia)** so `<html lang="en-AU">` is output. Today it is `lang="en"`.
 - **Title:** `Tyres & Car Servicing Newcastle | O'Neills Tyre & Autocare`
 - **Meta description:** `Family owned since 1961. Buy tyres online or book a service at 8 O'Neills stores across Newcastle, Lake Macquarie and the Hunter.`
-- **Open Graph:** add `og:title`, `og:description`, `og:image` and `og:locale` = `en_AU` (values are in `preview.html` `<head>`). The live homepage has none.
+- **Open Graph:** add `og:title`, `og:description`, `og:image` and `og:locale` = `en_AU` (values are in `index.html` `<head>`). The live homepage has none.
 - **One H1:** "Tyres, wheels and car servicing across Newcastle and the Hunter". The slogan is now real text, not baked into the hero image. Every section has an H2, and the cards inside a section use H3. Don't use H4 to H6 in the footer: column titles are `<p>` inside a labelled `<nav>`.
 - **No `aggregateRating` in schema.** Google treats review markup on your own Organization or LocalBusiness as self-serving, and doesn't allow ratings aggregated from Google into your own markup.
 - Store data (address, phone, hours, Google place IDs) appears in 3 places: the store cards, `STORES` in the JS, and the JSON-LD. If anything changes, update all 3, plus the location pages and the Google Business Profiles.
@@ -96,7 +96,7 @@ Store addresses in the footer link to each store's Google Maps listing by place 
 - **Row 2:** one capsule per store (name and rating), most reviewed first; Broadmeadow is selected by default. ARIA `tablist`; left and right arrow keys move between stores. On phones the row scrolls sideways.
 - **Row 3:** up to 3 review cards for the selected store (stars, text clamped to 4 lines, reviewer photo or initial, name, store, date, Google mark), then two buttons for that store: "Read all N reviews" (`search.google.com/local/reviews?placeid=`) and "Write a review" (`search.google.com/local/writereview?placeid=`). Both open Google in a new tab.
 - **Review cards need a real feed. Never hard-code or write reviews.** Either render the cached reviews into the page as `<script type="application/json" id="...">` and set `data-json` on the section to that id (best: no extra request), or set `data-endpoint` to a JSON URL. Same shape either way, keyed by store: `{"broadmeadow": [{"id", "author", "authorUrl", "photo", "rating", "text", "when"}], "beresfield": [...], ...}`. Keys: broadmeadow, beresfield, gateshead, warnersBay, belmont, morisset, kurriKurri, cessnock. Source: Google Places API (New), Place Details with `reviews` (up to 5 per place: `authorAttribution.displayName`, `.uri`, `.photoUri`, `rating`, `text.text`, `relativePublishTimeDescription`), cached server-side and refreshed daily. Keep the author name, photo and link (Google requires the attribution). With no endpoint, or no reviews for a store, the cards stay hidden and only the two Google buttons show.
-- **Preview only:** `preview.html` inlines `data/preview-reviews.json` (clearly labelled sample cards for layout review) through `data-json`, so the cards show even when the file is opened straight from the folder. `tools/build.py` adds that only to the preview; the Hyvä template has no sample data. Never deploy the sample file.
+- **Preview only:** `index.html` inlines `data/preview-reviews.json` (clearly labelled sample cards for layout review) through `data-json`, so the cards show even when the file is opened straight from the folder. `tools/build.py` adds that only to the preview; the Hyvä template has no sample data. Never deploy the sample file.
 - **Keeping ratings current:** update the per-store ratings and counts in `tools/lower_sections.py` monthly, or render them from the Places API (`rating`, `userRatingCount`).
 - **Remove the Trustpilot badge.** The brand has no Trustpilot profile.
 - **Don't use the Birdeye page (`reviews.birdeye.com/o-neills-tyres-167590212838801`).** It belongs to O'Neills Tyres, 61 Melbourne St, East Maitland, a different business that isn't one of the 8 stores.
@@ -140,6 +140,7 @@ Standalone section links (card links, service links, Store details, Read reviews
 Links inside sentences stay as underlined text. Buttons keep the 12px radius (`rounded-xl`).
 
 ### Header
+- **Promotions bar** (`ohPromo`, end of `src/header.html`, so sitewide): directly under the navigation, not sticky. Two banners crossfade every 5 seconds; both link to `/specials` (the existing Specials page). It pauses on hover, on keyboard focus and with the pause button (WCAG 2.2.2), stops when the tab is hidden, and doesn't auto-rotate for visitors who prefer reduced motion. Dots and pause/play sit bottom right (24px targets), clear of the offer text. Height: on phones the full banner (8.5:1, about 45 to 55px tall); from 768px the bar is 40% shorter (`md:aspect-[1920/136]`, 90px at 1280 wide), the banner is centred, and each side is filled with that banner's own edge colours, with the banner edges faded into them, so it still reads as a full-width strip. **When swapping a banner, set its side colours** (the two `bg-[...]` classes per slide in `src/header.html`). Banners are cropped to one shape (8.5:1) so the bar never changes height: `assets/promos/{pirelli-20-off,buy-3-get-1-free}-{1920,960}.webp` (18 to 58 KB; the source PNGs are in `src/`). Each image's alt text states the offer. In Hyvä, build it as a CMS block or widget under the header so marketing can swap banners, and upload the images to `/media/wysiwyg/oneills-home/promos/`. On phones the bar is about 45 to 55px tall, so the small print in the artwork is hard to read; see client confirmation 6.
 - **Favourites:** heart icon before the cart, linking to `/wishlist` (Magento wish list), on every screen size, plus a Favourites link with My account in the mobile menu. Per the CRO rules, only keep it if the wish list is enabled (Stores > Configuration > Customers > Wish List) and product cards and pages have an "Add to favourites" button. Optional: show the item count from Hyvä's `wishlist` customer section.
 - **Spacing:** below 640px the search, Favourites and cart buttons are 36px (still above the 24px minimum) so the header fits on a 360px phone. Between 1024 and 1279px the logo is 40px tall and the icon buttons are tighter, so the nav, icons and Book a service fit on one line.
 - The main header is `position: sticky; top: 0`; the utility bar above it scrolls away. Sticky breaks if any ancestor (for example `.page-wrapper`) has `overflow: hidden`, so check the theme CSS.
@@ -160,7 +161,7 @@ Links inside sentences stay as underlined text. Buttons keep the 12px radius (`r
 | Removed | Reason |
 |---|---|
 | Trustpilot "Excellent" badge | No Trustpilot profile exists |
-| 3 promo cards (25% off, $100 cashback, buy 3 get 1 free) | `/specials` is empty, and offers without terms are a consumer law risk. Add a specials block only when there is a live offer with terms and an end date |
+| 3 promo cards (25% off, $100 cashback, buy 3 get 1 free) | Replaced by the promotions bar under the navigation (see Header). Each offer still needs terms and an end date on `/specials` (consumer law) |
 | "Fast Nationwide Shipping" and "Secure Payments" trust strip | Generic, and shipping doesn't match a fit-in-store model |
 | "Why choose us" cards | Repeated the same facts (years, locations) shown elsewhere |
 | Stock model photo (person.webp) | Not a real staff member |
@@ -198,7 +199,7 @@ The homepage uses the only real photos on the site today: `New.webp` (a store fr
 3. **Mobile tyre fitting:** is it offered? It was in the old FAQ, so it was removed until confirmed.
 4. **Pink slips:** which stores are Authorised Inspection Stations?
 5. **What's included with new tyres:** confirm free fitting, standard balancing and new valves are still included, and that alignment is charged separately.
-6. **Specials:** are there current offers with terms? If not, hide the Specials menu item.
+6. **Specials:** the promotions bar advertises 20% off selected Pirelli tyres and Buy 3 get 1 free. Put the terms, eligible products and end date of each on `/specials`, and remove a banner when its offer ends. Supply phone-sized versions of the banners (for example 750 x 250) if the small print should stay readable on phones.
 7. **"TME" in Beresfield TME:** what does it stand for, so the copy can say it in full once.
 8. **ABN:** provide it for the footer.
 9. **Social accounts:** X is `x.com/oneillstyres` (confirmed). Which Facebook page is official? (`facebook.com/oneillstyres` or `facebook.com/ONeillsTyreAutocare`)
@@ -207,7 +208,7 @@ The homepage uses the only real photos on the site today: `New.webp` (a store fr
 
 ## Regenerating after edits
 
-`preview.html`, `schema/home-jsonld.html` and `hyva/.../homepage.phtml` are generated. Sections 2a and 5 to 9 inside `src/home-content.html`, and the two graphics in `src/icons.html`, are also generated: change `tools/makes_section.py`, `tools/lower_sections.py` or `tools/graphics.py` and run it (`python3 tools/makes_section.py`, `python3 tools/splice_lower.py`, `python3 tools/graphics.py`). Edit `src/` or `js/`, then run from the `homepage` folder:
+`index.html`, `schema/home-jsonld.html` and `hyva/.../homepage.phtml` are generated. Sections 2a and 5 to 9 inside `src/home-content.html`, and the two graphics in `src/icons.html`, are also generated: change `tools/makes_section.py`, `tools/lower_sections.py` or `tools/graphics.py` and run it (`python3 tools/makes_section.py`, `python3 tools/splice_lower.py`, `python3 tools/graphics.py`). Edit `src/` or `js/`, then run from the `homepage` folder:
 
 ```bash
 python3 tools/schema.py src/home-content.html schema/home-jsonld.html && python3 tools/build.py .

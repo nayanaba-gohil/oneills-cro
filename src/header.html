@@ -155,3 +155,31 @@
     </nav>
   </div>
 </header>
+
+<!-- Promotions bar (sitewide, under the navigation): two banners, 5 seconds each, both link to /specials (ohPromo).
+     Pauses on hover, on keyboard focus and with the pause button (WCAG 2.2.2); no auto-rotation with reduced motion.
+     Banners: assets/promos, 1920 x 226 (8.5:1) and 960 x 113. Bar height: full banner on phones; from 768px 40% shorter, centred, with side fills in each banner's edge colours (set per banner when swapping artwork). Each offer needs its terms and end date on /specials. -->
+<section class="bg-slate-100" aria-roledescription="carousel" aria-label="Current offers" x-data="ohPromo" data-interval="5000" @mouseenter="hold" @mouseleave="release" @focusin="hold" @focusout="release">
+  <div class="relative mx-auto aspect-[1920/226] max-w-[1920px] overflow-hidden md:aspect-[1920/136]">
+    <div role="group" aria-roledescription="slide" aria-label="1 of 2" data-promo class="absolute inset-0 overflow-hidden" x-show="shown.s0"
+         x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+      <!-- From 768px the banner is 40% shorter and centred; the sides continue its own edge colours so the bar stays full width -->
+      <div class="absolute inset-0 hidden md:block" aria-hidden="true"><div class="absolute inset-y-0 left-0 w-1/2 bg-[#FED71D]"></div><div class="absolute inset-y-0 right-0 w-1/2 bg-[#082844]"></div></div>
+      <a href="/specials" class="relative flex h-full w-full justify-center"><img src="assets/promos/pirelli-20-off-1920.webp" srcset="assets/promos/pirelli-20-off-960.webp 960w, assets/promos/pirelli-20-off-1920.webp 1920w" sizes="(min-width: 1920px) 1152px, (min-width: 768px) 60vw, 100vw" alt="20% off selected Pirelli tyres. See current specials" width="1920" height="226" class="h-full w-full object-contain md:w-auto md:[-webkit-mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)] md:[mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]"></a>
+    </div>
+    <div role="group" aria-roledescription="slide" aria-label="2 of 2" data-promo class="absolute inset-0 overflow-hidden" x-show="shown.s1" x-cloak
+         x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+      <!-- From 768px the banner is 40% shorter and centred; the sides continue its own edge colours so the bar stays full width -->
+      <div class="absolute inset-0 hidden md:block" aria-hidden="true"><div class="absolute inset-y-0 left-0 w-1/2 bg-[#D71620]"></div><div class="absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(180deg,#F6F5F1,#F5E0DA_58%,#2C2C35_66%,#171A22)]"></div></div>
+      <a href="/specials" class="relative flex h-full w-full justify-center"><img src="assets/promos/buy-3-get-1-free-1920.webp" srcset="assets/promos/buy-3-get-1-free-960.webp 960w, assets/promos/buy-3-get-1-free-1920.webp 1920w" sizes="(min-width: 1920px) 1152px, (min-width: 768px) 60vw, 100vw" alt="Buy 3 tyres, get 1 free. See current specials" width="1920" height="226" loading="lazy" class="h-full w-full object-contain md:w-auto md:[-webkit-mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)] md:[mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]"></a>
+    </div>
+    <!-- Controls: two dots and pause/play, 24px tap targets, bottom right (over the tyre artwork, clear of the offer text) -->
+    <div class="absolute bottom-1 right-1.5 flex items-center rounded-full bg-white/85 px-0.5 shadow-sm sm:bottom-2 sm:right-3">
+      <button type="button" data-slide="0" @click="go" :aria-current="current.s0" class="flex h-6 w-6 items-center justify-center"><span class="sr-only">Show offer 1</span><span class="h-2 w-2 rounded-full" :class="dotCls.s0"></span></button>
+      <button type="button" data-slide="1" @click="go" :aria-current="current.s1" class="flex h-6 w-6 items-center justify-center"><span class="sr-only">Show offer 2</span><span class="h-2 w-2 rounded-full" :class="dotCls.s1"></span></button>
+      <button type="button" @click="toggle" class="flex h-6 w-6 items-center justify-center text-navy-900"><span class="sr-only" x-text="toggleLabel">Pause offers</span><svg class="h-3.5 w-3.5" aria-hidden="true" x-show="playing"><use href="#i-pause"></use></svg><svg class="h-3.5 w-3.5" aria-hidden="true" x-show="paused" x-cloak><use href="#i-play"></use></svg></button>
+    </div>
+  </div>
+</section>

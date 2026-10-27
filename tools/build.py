@@ -2,7 +2,7 @@ import sys, pathlib, re
 H = pathlib.Path(sys.argv[1])
 r = lambda p: (H / p).read_text()
 
-# ---------- 1. preview.html (single file, CDN Tailwind + Alpine) ----------
+# ---------- 1. index.html: single-file preview (CDN Tailwind + Alpine), published on GitHub Pages ----------
 head = """<!doctype html>
 <html lang="en-AU">
 <head>
@@ -39,13 +39,13 @@ tailwind.config = {
 <body class="bg-white font-sans text-slate-700 antialiased">
 """
 body = r("src/icons.html") + r("src/header.html") + r("src/home-content.html") + r("src/footer.html")
-# PREVIEW ONLY: sample review cards (clearly labelled, not real reviews) inlined so they also show when preview.html is
+# PREVIEW ONLY: sample review cards (clearly labelled, not real reviews) inlined so they also show when index.html is
 # opened straight from the folder (a fetch of a local file is blocked there). The Hyvä template keeps data-endpoint="".
 body = body.replace('x-data="ohReviews" data-endpoint=""', 'x-data="ohReviews" data-endpoint="" data-json="oh-reviews-preview"', 1)
 body += '<script type="application/json" id="oh-reviews-preview">' + r("data/preview-reviews.json").replace("</", "<\\/") + '</script>\n'
 tail = "<script>\n" + r("js/oneills-home.js") + "</script>\n" + \
        '<!-- PREVIEW ONLY: Alpine is already loaded by Hyvä. -->\n<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>\n</body>\n</html>\n'
-(H / "preview.html").write_text(head + body + tail)
+(H / "index.html").write_text(head + body + tail)
 
 # ---------- 2. Hyvä template + layout ----------
 MEDIA_BASE = '/media/wysiwyg/oneills-home/'  # upload homepage/assets/* here
@@ -104,4 +104,4 @@ layout.mkdir(parents=True, exist_ok=True)
     </body>
 </page>
 """)
-print("built preview.html", (H / "preview.html").stat().st_size, "bytes; hyva/ template", (out / "homepage.phtml").stat().st_size, "bytes")
+print("built index.html", (H / "index.html").stat().st_size, "bytes; hyva/ template", (out / "homepage.phtml").stat().st_size, "bytes")
