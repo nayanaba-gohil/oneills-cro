@@ -1,0 +1,743 @@
+<!--
+  O'Neills product page (wheel): everything between header and footer. Design for Hyvä's Magento_Catalog product view.
+  Sample product: ROH Apollo (configurable: Wheel finish x Size / specifications, two finish images, no reviews yet). Template: product-content-single.html (approved tyre page, Round 21).
+  Price, stock, images, sizes and finishes in this file are SAMPLE values from the live product (oneillstyres.com.au/apollo) for layout review; on the live page they come from Magento (see DEV-NOTES Round 22).
+  Copy rules applied: Australian English, sentence case, no em dashes, no uppercase body text, prices include GST. Facts not on the live page are NOT shown (see the Round 22 client confirmations).
+  Tailwind safelist for classes that only appear in js/oneills-pdp.js getters (finishCls): border-brand-600 ring-2 ring-brand-600 border-slate-300 hover:border-slate-400
+-->
+<main id="maincontent" class="bg-white font-sans text-slate-700 antialiased">
+
+  <!-- ========== Breadcrumb (BreadcrumbList schema in schema/product-jsonld-wheel.html) ========== -->
+  <nav aria-label="Breadcrumb" class="border-b border-slate-200 bg-white">
+    <ol class="mx-auto flex max-w-7xl items-center gap-1.5 whitespace-nowrap px-4 py-3 text-sm text-slate-500 lg:px-6">
+      <li class="shrink-0"><a href="/" class="inline-block py-0.5 hover:text-brand-700 hover:underline">Home</a></li>
+      <li aria-hidden="true" class="shrink-0"><svg class="h-4 w-4 -rotate-90 text-slate-400"><use href="#i-chevron-down"></use></svg></li>
+      <li class="shrink-0"><a href="/wheels" class="inline-block py-0.5 hover:text-brand-700 hover:underline">Wheels</a></li>
+      <li aria-hidden="true" class="shrink-0"><svg class="h-4 w-4 -rotate-90 text-slate-400"><use href="#i-chevron-down"></use></svg></li>
+      <li aria-current="page" class="min-w-0 truncate font-medium text-navy-900">ROH Apollo</li>
+    </ol>
+  </nav>
+
+
+  <!-- ========== 1. First screen: gallery + buy box ========== -->
+  <!-- ohBuy: finish and size options, quantity stepper, live total and the mobile sticky bar. data-price = default price each incl. GST; data-noun switches the wording to wheels.
+       data-finishes and data-sizes are the child products of the configurable product (SKU = size sku + finish suffix). @oh-pick: a gallery thumbnail click selects that finish. -->
+  <section class="mx-auto max-w-7xl px-4 pb-12 pt-6 lg:px-6 lg:pb-16 lg:pt-8" aria-labelledby="product-title" x-data="ohBuy" @oh-pick.window="onPick" data-noun="wheel" data-price="429" data-finishes='[{"id":300,"label":"Matte Black","sfx":"MB","default":true},{"id":301,"label":"Machined","sfx":"FM"}]' data-sizes='[{"id":200,"label":"17x9 6x139.7 +12","price":405,"d":17,"w":9,"pcd":"6x139.7","off":12,"sku":"APO17912"},{"id":201,"label":"17x9 6x139.7 +40","price":405,"d":17,"w":9,"pcd":"6x139.7","off":40,"sku":"APO17940"},{"id":202,"label":"18x9 6x139.7 +12","price":429,"d":18,"w":9,"pcd":"6x139.7","off":12,"sku":"APO18912"},{"id":203,"label":"18x9 6x139.7 +25","price":429,"d":18,"w":9,"pcd":"6x139.7","off":25,"sku":"APO18925","default":true,"note":"Standard Fit"},{"id":204,"label":"18x9 6x139.7 +40","price":429,"d":18,"w":9,"pcd":"6x139.7","off":40,"sku":"APO18940"}]' data-qty="1" data-stores='[{"name":"Belmont","qty":6,"date":null,"address":"3 Herbert St, Belmont NSW 2280","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Belmont&query_place_id=ChIJUT1R790ic2sRBtAcSOyp2Do"},{"name":"Broadmeadow","qty":4,"date":null,"address":"4 Newton St, Broadmeadow NSW 2292","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Broadmeadow&query_place_id=ChIJe1NrzL8Vc2sR_i-Q3Sa9Tv0"},{"name":"Beresfield TME","qty":null,"date":"2026-10-28","address":"2 Babilla Cl, Beresfield NSW 2322","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Beresfield&query_place_id=ChIJJ6tn6-VAc2sRX0xVCGpsU4Y"},{"name":"Cessnock","qty":null,"date":"2026-10-28","address":"256 Maitland Rd, Cessnock NSW 2325","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Cessnock&query_place_id=ChIJla38nO40c2sRYiH7itsBNRA"},{"name":"Gateshead","qty":null,"date":"2026-10-28","address":"1 Navin Cl, Gateshead NSW 2290","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Gateshead&query_place_id=ChIJl87sCXs9c2sRWMRP-lAldcg"},{"name":"Kurri Kurri","qty":null,"date":"2026-10-29","address":"249 Lang St, Kurri Kurri NSW 2327","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Kurri%20Kurri&query_place_id=ChIJGR8f_cU3c2sRZpaMIv3yCNo"},{"name":"Morisset","qty":null,"date":"2026-10-29","address":"36 Gateway Blvd, Morisset NSW 2264","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Morisset&query_place_id=ChIJ56Bc_zMoc2sREeYl_lwClG0"},{"name":"Warners Bay","qty":null,"date":"2026-10-29","address":"183 Macquarie Rd, Warners Bay NSW 2282","map":"https://www.google.com/maps/search/?api=1&query=O%27Neills%20Tyre%20%26%20Autocare%20Warners%20Bay&query_place_id=ChIJAUGelLI9c2sR0d9kZBawfKE"}]'>
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-12">
+
+      <!-- Gallery: 40% of the width on desktop. Single image only, no thumbnails. -->
+      <div>
+        <div class="aspect-square max-w-full rounded-2xl bg-slate-50 p-6">
+          <img src="assets/live/roh-apollo-matte-black.webp" alt="ROH Apollo 4WD wheel in Matte Black" width="640" height="640" fetchpriority="high" class="h-full w-full object-contain">
+        </div>
+        <!-- Brand logo: full width of the gallery column under a thin divider matching tyre page. -->
+        <div class="mt-5 border-t border-slate-200 pt-5">
+          <a href="https://oneillstyres.com.au/wheels" class="block w-full">
+            <img src="assets/brands/roh-wheels.svg" alt="ROH Wheels" width="600" height="135" class="h-auto w-full object-contain">
+            <span class="sr-only">ROH wheels</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right column: H1, rating + category row, stock, description, finish, size, price card, pay later, trust points. -->
+      <div>
+       <div>
+        <h1 id="product-title" class="font-display text-2xl font-semibold leading-tight text-navy-900 sm:text-3xl">ROH Apollo 4WD wheel</h1>
+        <div class="mt-2.5 flex items-center text-sm">
+        <!-- No reviews yet: five grey stars and a link to the review form (#write-review). -->
+          <a href="#write-review" class="group inline-flex items-center gap-2 py-0.5">
+            <span class="flex text-slate-200" aria-hidden="true"><svg class="h-4 w-4 shrink-0"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0"><use href="#i-star"></use></svg></span>
+            <span class="font-medium text-brand-700 group-hover:underline">Be the first to review</span>
+          </a>
+        </div>
+
+
+        <!-- Store stock and Wishlist button: full width, flush-aligned with size selector and price card -->
+        <div class="mt-4 flex w-full items-center gap-3">
+          <div :class="storeBoxCls" class="flex-1 min-w-0 flex items-center justify-between gap-x-3 gap-y-1 rounded-xl bg-emerald-50/60 px-4 py-2.5">
+            <div class="flex min-w-0 flex-1 items-center gap-2.5">
+              <span :class="storeDotCls" class="h-2 w-2 shrink-0 rounded-full bg-emerald-500" aria-hidden="true"></span>
+              <div class="min-w-0 py-0.5" role="status">
+                <p class="text-sm text-slate-700"><span class="text-navy-900" x-text="storeLead">In stock at </span><strong class="font-semibold text-navy-900" x-text="storeBold">Belmont</strong></p>
+              </div>
+            </div>
+            <button type="button" @click="openStores" aria-haspopup="dialog" class="inline-flex shrink-0 items-center gap-1 rounded-lg border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-semibold text-brand-700 underline-offset-4 hover:border-brand-300 hover:bg-brand-50 shadow-2xs">Change store<svg class="h-3.5 w-3.5 -rotate-90" aria-hidden="true"><use href="#i-chevron-down"></use></svg></button>
+          </div>
+          <!-- Wishlist Fav Icon: 48px height matching selector & buttons, sits flush on right border -->
+          <a href="/wishlist" class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:border-rose-400 hover:bg-rose-50 hover:text-rose-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 shadow-2xs" title="Save to wishlist" aria-label="Add to wishlist">
+            <svg class="h-5 w-5 shrink-0" aria-hidden="true"><use href="#i-heart"></use></svg>
+          </a>
+        </div>
+
+        <form id="pdp-form" action="/checkout/cart/add" method="post">
+          <input type="hidden" name="qty" :value="qty" value="1">
+          <!-- Hyvä: configurable product, super_attribute[{attribute_id}] = option id of the chosen value (wheel_finish and the size / specifications attribute). -->
+          <input type="hidden" name="super_attribute[wheel_finish]" :value="finishValue" value="300">
+          <input type="hidden" name="super_attribute[size]" :value="sizeValue" value="203">
+          <!-- Wheel finish: modern interactive finish cards with live selection indicator -->
+          <div class="mt-4" role="group" aria-labelledby="pdp-finish-label">
+            <div class="flex items-center justify-between">
+              <label id="pdp-finish-label" class="text-sm font-semibold text-navy-900">Finish: <strong class="font-bold text-navy-950" x-text="finishLabel">Matte Black</strong></label>
+              <span class="text-xs text-slate-500">2 finishes</span>
+            </div>
+            <div class="mt-2 grid grid-cols-2 gap-3">
+              <!-- Finish 0: Matte Black -->
+              <button type="button"
+                      data-finish="0"
+                      @click="setFinish(0)"
+                      :aria-pressed="finishIdx === 0"
+                      :class="finishIdx === 0 ? 'border-brand-600 bg-brand-50/50 ring-2 ring-brand-600 shadow-xs' : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/80'"
+                      class="group relative flex h-14 items-center justify-between rounded-xl border px-3.5 py-2.5 text-left transition cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600">
+                <div class="flex min-w-0 items-center gap-3">
+                  <!-- Swatch with dual-ring -->
+                  <span class="relative flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-neutral-900 ring-2 transition"
+                        :class="finishIdx === 0 ? 'ring-brand-600 ring-offset-2 ring-offset-white' : 'ring-slate-300'">
+                    <span class="h-3 w-3 rounded-full bg-neutral-950"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="truncate text-sm font-semibold text-navy-900">Matte Black</p>
+                    <p class="text-[11px] text-slate-500">Satin dark finish</p>
+                  </div>
+                </div>
+                <!-- Selection checkmark badge -->
+                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full transition"
+                      :class="finishIdx === 0 ? 'bg-brand-600 text-white' : 'bg-transparent text-transparent'">
+                  <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </button>
+
+              <!-- Finish 1: Machined -->
+              <button type="button"
+                      data-finish="1"
+                      @click="setFinish(1)"
+                      :aria-pressed="finishIdx === 1"
+                      :class="finishIdx === 1 ? 'border-brand-600 bg-brand-50/50 ring-2 ring-brand-600 shadow-xs' : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/80'"
+                      class="group relative flex h-14 items-center justify-between rounded-xl border px-3.5 py-2.5 text-left transition cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600">
+                <div class="flex min-w-0 items-center gap-3">
+                  <!-- Swatch with dual-ring -->
+                  <span class="relative flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-slate-300 via-slate-100 to-slate-400 ring-2 transition"
+                        :class="finishIdx === 1 ? 'ring-brand-600 ring-offset-2 ring-offset-white' : 'ring-slate-300'">
+                    <span class="h-3 w-3 rounded-full bg-gradient-to-br from-white to-slate-300"></span>
+                  </span>
+                  <div class="min-w-0">
+                    <p class="truncate text-sm font-semibold text-navy-900">Machined</p>
+                    <p class="text-[11px] text-slate-500">Tinted alloy face</p>
+                  </div>
+                </div>
+                <!-- Selection checkmark badge -->
+                <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full transition"
+                      :class="finishIdx === 1 ? 'bg-brand-600 text-white' : 'bg-transparent text-transparent'">
+                  <svg class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+          <!-- Size / specifications: label on left, link on right above select dropdown. Enhanced interactive selector for desktop and mobile -->
+          <div class="mt-4" @click.away="sizeOpen = false" @keydown.escape="sizeOpen = false">
+            <div class="flex items-center justify-between">
+              <label id="pdp-size-label" class="text-sm font-semibold text-navy-900">Select Size:</label>
+              <a href="#fit" class="text-xs font-semibold text-brand-700 underline underline-offset-2 hover:text-brand-800">How to read wheel offsets</a>
+            </div>
+
+            <!-- Native select for form submit and accessibility fallback -->
+            <select id="pdp-size" name="size" class="sr-only" aria-labelledby="pdp-size-label" tabindex="-1">
+              <template x-for="(s, i) in sizes" :key="s.id">
+                <option :value="i" :selected="i === sizeIdx" x-text="s.label + ' · $' + s.price.toFixed(2) + ' each'"></option>
+              </template>
+            </select>
+
+            <div class="relative mt-1.5">
+              <!-- Custom Select Trigger Button -->
+              <button type="button" @click="toggleSize" aria-haspopup="listbox" :aria-expanded="sizeOpen" aria-labelledby="pdp-size-label"
+                      class="flex h-12 w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 text-left shadow-2xs transition focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-600/20 hover:border-slate-300">
+                <div class="flex min-w-0 items-center gap-2.5 truncate">
+                  <span class="font-semibold text-navy-900 truncate" x-text="currentSize.label || '18x9 6x139.7 +25'"></span>
+                  <span class="text-slate-400">&middot;</span>
+                  <span class="text-sm font-medium text-slate-600" x-text="'$' + (currentSize.price || 429).toFixed(2) + ' each'"></span>
+                  <span x-show="currentSize.note" class="hidden sm:inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700" x-text="currentSize.note">Standard Fit</span>
+                </div>
+                <svg class="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200" :class="{ 'rotate-180': sizeOpen }" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <!-- Improved Options List (Floating panel on desktop, comfortable finger targets on mobile) -->
+              <div x-show="sizeOpen" x-cloak
+                   x-transition:enter="transition ease-out duration-150"
+                   x-transition:enter-start="opacity-0 translate-y-1 scale-[0.99]"
+                   x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                   x-transition:leave="transition ease-in duration-100"
+                   x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                   x-transition:leave-end="opacity-0 translate-y-1 scale-[0.99]"
+                   class="absolute left-0 right-0 z-30 mt-1.5 max-h-72 overflow-y-auto rounded-2xl border border-slate-200/90 bg-white p-1.5 shadow-xl ring-1 ring-slate-900/5 focus:outline-none [scrollbar-width:thin]"
+                   role="listbox">
+                <template x-for="(s, i) in sizes" :key="s.id">
+                  <button type="button" role="option" :aria-selected="i === sizeIdx"
+                          @click="selectSize(i)"
+                          class="group flex w-full items-center justify-between gap-3 rounded-xl px-3.5 py-3 text-left transition cursor-pointer"
+                          :class="i === sizeIdx ? 'bg-brand-50/80 text-brand-900 font-semibold' : 'hover:bg-slate-50 text-slate-800'">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                      <!-- Active checkmark indicator -->
+                      <span class="flex h-5 w-5 shrink-0 items-center justify-center">
+                        <svg x-show="i === sizeIdx" class="h-4 w-4 text-brand-600" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                      </span>
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                          <span class="text-sm font-semibold text-navy-900" x-text="s.label"></span>
+                          <span x-show="s.note" class="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700" x-text="s.note"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="shrink-0 text-right">
+                      <span class="text-sm font-bold text-navy-900" x-text="'$' + s.price.toFixed(2)"></span>
+                      <span class="text-xs text-slate-500 font-normal"> each</span>
+                    </div>
+                  </button>
+                </template>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price card: bg-slate-50 matching product image container, shadow removed -->
+          <div class="mt-4 rounded-2xl bg-slate-50 p-5 sm:p-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <p class="flex items-baseline gap-2">
+                  <span class="font-display text-4xl font-bold leading-none text-slate-950 tracking-tight" x-text="priceLabel">$429.00</span>
+                  <span class="text-slate-500 font-medium">each</span>
+                </p>
+              </div>
+              <!-- Promotional offer banner: yellow gradient, Title Case, bold typography, clicks to set qty 4 -->
+              <button type="button" @click="setQty(4)"
+                class="promo-offer-banner group flex-1 min-w-[260px] sm:max-w-xs text-left rounded-xl border px-4 py-2.5 transition cursor-pointer"
+                style="background: linear-gradient(to left, #FFEB3B 0%, rgb(237, 226, 126) 50%, rgba(255, 255, 255, 0.95) 100%); border-color: #FFEB3B;"
+                title="Apply Buy 4 Wheels & Save $120 promotion (sets quantity to 4)">
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <span class="flex h-2.5 w-2.5 rounded-full bg-[#E65100] animate-pulse"></span>
+                    <span class="text-xs sm:text-sm font-extrabold text-slate-950">Buy 4 Wheels <span
+                        class="text-[#E65100] font-black text-sm sm:text-base">&amp; Save $120</span></span>
+                  </div>
+                  <svg class="h-4 w-4 shrink-0 text-[#E65100] transition group-hover:translate-x-0.5" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                <div class="mt-0.5 flex items-center justify-between text-[11px] font-bold text-slate-800">
+                  <span>Free accessories &amp; fitting kit</span>
+                  <span class="text-[10px] font-extrabold text-[#E65100] underline underline-offset-2">Sets Qty to 4</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Interest / pay later options inside price card: Details placed immediately next to logos -->
+            <div
+              class="mt-3.5 pt-3.5 border-t border-slate-200/80 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs text-slate-600">
+              <span>Or 4 interest-free payments of <strong class="font-bold text-navy-900"
+                  x-text="installment">$107.25</strong> with</span>
+              <div class="inline-flex items-center gap-1.5 align-middle">
+                <button type="button" @click="openPayLater('afterpay')" aria-haspopup="dialog"
+                  class="inline-flex h-6 items-center rounded bg-[#b2fce4] px-2 transition hover:brightness-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                  title="View Afterpay details">
+                  <svg class="h-2.5 w-14" role="img" aria-label="Afterpay">
+                    <use href="#pay-afterpay"></use>
+                  </svg>
+                </button>
+                <button type="button" @click="openPayLater('zip')" aria-haspopup="dialog"
+                  class="inline-flex h-6 items-center rounded border border-slate-200 bg-white px-2 transition hover:border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+                  title="View Zip details">
+                  <svg class="h-2.5 w-7" role="img" aria-label="Zip">
+                    <use href="#pay-zip"></use>
+                  </svg>
+                </button>
+                <button type="button" @click="openPayLater('humm')" aria-haspopup="dialog"
+                  class="inline-flex h-6 items-center rounded border border-slate-200 bg-white px-2 transition hover:border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                  title="View humm details">
+                  <svg class="h-2.5 w-12" role="img" aria-label="humm">
+                    <use href="#pay-humm"></use>
+                  </svg>
+                </button>
+                <span class="text-slate-300" aria-hidden="true">&middot;</span>
+                <button type="button" @click="openPayLater('afterpay')" aria-haspopup="dialog"
+                  class="font-semibold text-brand-700 underline underline-offset-2 hover:text-brand-800">
+                  Details
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-4 flex flex-wrap items-stretch gap-3 sm:flex-nowrap" x-ref="cta">
+              <div class="flex shrink-0 items-center overflow-hidden rounded-xl border border-slate-200 bg-white shadow-2xs" role="group" aria-label="Quantity">
+                <button type="button" @click="dec" :disabled="decDisabled" class="flex h-12 w-11 items-center justify-center text-lg text-navy-900 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300 disabled:hover:bg-white"><span class="sr-only">Decrease quantity</span><span aria-hidden="true">&minus;</span></button>
+                <span class="w-8 text-center font-semibold text-navy-900" role="status" x-text="qty">1</span>
+                <button type="button" @click="inc" :disabled="incDisabled" class="flex h-12 w-11 items-center justify-center text-lg text-navy-900 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-300 disabled:hover:bg-white"><span class="sr-only">Increase quantity</span><span aria-hidden="true">+</span></button>
+              </div>
+              <button type="submit" class="flex h-12 min-w-0 flex-1 basis-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-brand-600 px-3 text-base sm:px-4 font-semibold text-white shadow-xs transition hover:bg-brand-700 active:scale-[0.99]">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span x-text="ctaLabel">Add wheels to cart</span>
+              </button>
+              <!-- Price match button with thin border on white background -->
+              <button type="button" @click="openPriceMatch" aria-haspopup="dialog" class="flex h-12 w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-base font-semibold text-navy-900 shadow-2xs transition hover:border-brand-600 hover:text-brand-700 sm:w-auto sm:min-w-0 sm:flex-1 sm:basis-0">Price match</button>
+            </div>
+            <div class="mt-3 text-xs text-slate-500">
+              <p>Total for <span class="font-semibold text-navy-900" x-text="qtyLabel">1 wheel</span>: <strong class="text-sm font-bold text-navy-900" x-text="totalLabel">$429.00</strong></p>
+            </div>
+          </div>
+        </form>
+
+        <!-- Vehicle Fitment Reassurance Badge: placed after the price section, with dynamic vehicle models support -->
+        <div class="mt-4 flex items-center gap-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-200/60 px-4 py-3 text-xs sm:text-sm text-slate-700">
+          <svg class="h-5 w-5 shrink-0 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span class="leading-relaxed"><strong class="font-semibold text-navy-900">Guaranteed Fitment:</strong> Hilux, Ranger, D-Max, Prado
+            <br>100% verified by qualified local technicians before mounting. <a href="#fit" class="font-semibold text-brand-700 underline underline-offset-2 hover:text-brand-800">Check vehicle fitment</a></span>
+        </div>
+
+        <!-- 4 Inclusions directly below Guaranteed Fitment -->
+        <div class="mt-3 grid grid-cols-2 gap-2 sm:gap-2.5">
+          <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white p-2 shadow-2xs sm:px-3 sm:py-2.5">
+            <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 sm:h-8 sm:w-8">
+              <svg class="h-4 w-4 sm:h-4.5 sm:w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <span class="text-xs font-semibold leading-tight text-navy-900">Free Workshop Fitting</span>
+          </div>
+          <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white p-2 shadow-2xs sm:px-3 sm:py-2.5">
+            <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 sm:h-8 sm:w-8">
+              <svg class="h-4 w-4 sm:h-4.5 sm:w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v5.5M12 15.5V21M3 12h5.5M15.5 12H21"/><circle cx="16.5" cy="7.5" r="1.5" fill="currentColor"/></svg>
+            </div>
+            <span class="text-xs font-semibold leading-tight text-navy-900">Dynamic Balancing</span>
+          </div>
+          <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white p-2 shadow-2xs sm:px-3 sm:py-2.5">
+            <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 sm:h-8 sm:w-8">
+              <svg class="h-4 w-4 sm:h-4.5 sm:w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="m10 15 5-3-5-3v6z"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+            </div>
+            <span class="text-xs font-semibold leading-tight text-navy-900">Caps &amp; Hub Rings</span>
+          </div>
+          <div class="flex items-center gap-2.5 rounded-xl border border-slate-200/90 bg-white p-2 shadow-2xs sm:px-3 sm:py-2.5">
+            <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 sm:h-8 sm:w-8">
+              <svg class="h-4 w-4 sm:h-4.5 sm:w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <span class="text-xs font-semibold leading-tight text-navy-900">Structural Warranty</span>
+          </div>
+        </div>
+
+        <!-- Store stock panel: native dialog matching category page stock availability popup -->
+        <dialog x-ref="stores" class="stock-sheet" aria-labelledby="stockTitle" @click.self="closeStores" @close="onStoresClose">
+          <div class="stock-inner">
+            <div class="stock-head">
+              <div>
+                <h2 id="stockTitle">Stock Availability</h2>
+                <p id="stockSub" x-text="'ROH Apollo ' + (sizes[sizeIdx] ? sizes[sizeIdx].label : '18x9 6x139.7 +25')">ROH Apollo 18x9 6x139.7 +25</p>
+              </div>
+              <button class="stock-close" type="button" @click="closeStores" aria-label="Close">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+            <div class="stock-scroll">
+              <ul role="list">
+                <template x-for="row in rows" :key="row.name">
+                  <li :class="row.rowCls" @click="selectStore(row.name)" :title="'Select ' + row.name">
+                    <template x-if="row.state === 'today'">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </template>
+                    <template x-if="row.state === 'soon'">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </template>
+                    <template x-if="row.state === 'out'">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    </template>
+                    <span class="store-name" x-text="row.name"></span>
+                    <span class="store-state" x-text="row.statusText"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
+        </dialog>
+       </div>
+
+        <!-- @include pricematch -->
+        <!-- @include paylater -->
+      </div>
+    </div>
+    </div>
+
+    <!-- Mobile sticky bar: the only floating element on this page. Slides in once the main button scrolls off screen. -->
+    <div class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white p-3 shadow-[0_-4px_16px_rgba(10,22,40,0.08)] lg:hidden"
+         x-show="barShown" x-cloak
+         x-transition:enter="transition duration-200 ease-out" x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0"
+         x-transition:leave="transition duration-150 ease-in" x-transition:leave-start="translate-y-0" x-transition:leave-end="translate-y-full">
+      <div class="flex items-center gap-3">
+        <div class="min-w-0">
+          <p class="text-xs text-slate-500"><span x-text="qtyLabel">1 wheel</span></p>
+          <p class="font-display text-lg font-bold leading-tight text-navy-900" x-text="totalLabel">$429.00</p>
+        </div>
+        <button type="submit" form="pdp-form" class="ml-auto flex flex-1 items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-3 text-base font-semibold text-white">
+          <svg class="h-5 w-5" aria-hidden="true"><use href="#i-cart"></use></svg> <span x-text="barCtaLabel">Add wheels to cart</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 2. Product details: one tabbed section. ALL four panels stay in the HTML (SEO); x-show only toggles display ========== -->
+  <section id="details" class="scroll-mt-24 border-t border-slate-200 py-12 lg:py-16" aria-label="Product details" x-data="ohTabs">
+    <div class="mx-auto max-w-7xl px-4 lg:px-6">
+    <div role="tablist" aria-label="Product details" class="flex gap-6 overflow-x-auto border-b border-slate-200 sm:gap-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <button type="button" role="tab" id="tab-about" aria-controls="about" data-tab="about" :aria-selected="sel.about" :tabindex="idx.about" :class="cls.about" @click="pick" @keydown.left.prevent="prev" @keydown.right.prevent="next" class="-mb-px shrink-0 whitespace-nowrap border-b-2 px-1 py-3 text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 rounded-t-sm">About this wheel</button>
+      <button type="button" role="tab" id="tab-specs" aria-controls="specs" data-tab="specs" :aria-selected="sel.specs" :tabindex="idx.specs" :class="cls.specs" @click="pick" @keydown.left.prevent="prev" @keydown.right.prevent="next" class="-mb-px shrink-0 whitespace-nowrap border-b-2 px-1 py-3 text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 rounded-t-sm">Specifications</button>
+      <button type="button" role="tab" id="tab-faqs" aria-controls="faqs" data-tab="faqs" :aria-selected="sel.faqs" :tabindex="idx.faqs" :class="cls.faqs" @click="pick" @keydown.left.prevent="prev" @keydown.right.prevent="next" class="-mb-px shrink-0 whitespace-nowrap border-b-2 px-1 py-3 text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 rounded-t-sm">FAQs</button>
+      <button type="button" role="tab" id="tab-fit" aria-controls="fit" data-tab="fit" :aria-selected="sel.fit" :tabindex="idx.fit" :class="cls.fit" @click="pick" @keydown.left.prevent="prev" @keydown.right.prevent="next" class="-mb-px shrink-0 whitespace-nowrap border-b-2 px-1 py-3 text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 rounded-t-sm">Will it fit?</button>
+    </div>
+
+    <!-- About -->
+    <div id="about" role="tabpanel" aria-labelledby="tab-about" tabindex="0" x-show="on.about" class="mt-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-4">
+      <div class="grid items-start gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-16">
+      <div><h2 id="about-title" class="font-display text-xl font-bold tracking-tight text-navy-900 sm:text-2xl">About the ROH Apollo</h2>
+      <p class="mt-4 leading-relaxed text-slate-600">The Apollo is a clean, minimalist spoke wheel from the exclusive LITEFORGED series, made for 4WD and off-road use. Flow-formed construction reduces weight for better performance without compromising strength. It is available in 6x139.7 fitments only, in a Machined or Matte Black finish. See all <a href="https://oneillstyres.com.au/wheels" class="font-semibold text-brand-700 underline underline-offset-2">ROH wheels</a>, or browse <a href="https://oneillstyres.com.au/wheels/sizes/18-inch" class="font-semibold text-brand-700 underline underline-offset-2">18 inch wheels</a> and <a href="https://oneillstyres.com.au/wheels/sizes/17-inch" class="font-semibold text-brand-700 underline underline-offset-2">17 inch wheels</a>.</p>
+      <h3 class="mt-8 font-display text-lg font-bold text-navy-900">Is it the right wheel for you?</h3>
+      <ul class="mt-3 space-y-2 text-slate-600">
+        <li class="flex gap-2.5"><svg class="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true"><use href="#i-check"></use></svg><span>You drive a 4WD or ute with a 6x139.7 stud pattern. It is common on many dual-cab utes and 4WDs, so check your car before you order.</span></li>
+        <li class="flex gap-2.5"><svg class="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true"><use href="#i-check"></use></svg><span>You want a lighter flow-formed wheel without giving up strength.</span></li>
+        <li class="flex gap-2.5"><svg class="mt-1 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true"><use href="#i-check"></use></svg><span>You want to choose the offset to suit your build. A lower offset sits the wheel further out.</span></li>
+      </ul>
+      <h3 class="mt-8 font-display text-lg font-bold text-navy-900">Get the most from new wheels</h3>
+      <p class="mt-3 leading-relaxed text-slate-600">Book a <a href="https://oneillstyres.com.au/contact" class="font-semibold text-brand-700 underline underline-offset-2">wheel alignment</a> when the new wheels go on, so the car tracks straight and the tyres wear evenly. Ask our team to check wheel nut torque after the first drive.</p></div>
+      <aside class="rounded-2xl bg-slate-50 p-6" aria-label="What's included, fitting and returns">
+        <section id="included" class="scroll-mt-24" aria-labelledby="included-title">
+          <h3 id="included-title" class="font-display text-lg font-bold text-navy-900">What's included</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700">
+            <li class="flex gap-2.5"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true"><use href="#i-check"></use></svg><span>Fitting at the O'Neills store you choose</span></li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true"><use href="#i-check"></use></svg><span>Wheel balancing when fitted with tyres</span></li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-600" aria-hidden="true"><use href="#i-check"></use></svg><span>GST</span></li>
+          </ul>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">Tyres are sold separately. Shop tyres for <a href="https://oneillstyres.com.au/tyres/sizes" class="font-semibold text-brand-700 underline underline-offset-2">17 inch</a> and <a href="https://oneillstyres.com.au/tyres/sizes" class="font-semibold text-brand-700 underline underline-offset-2">18 inch</a> wheels.</p>
+        </section>
+        <section id="fitting" class="mt-6 scroll-mt-24 border-t border-slate-200 pt-6" aria-labelledby="fitting-title">
+          <h3 id="fitting-title" class="font-display text-lg font-bold text-navy-900">Fitting and returns</h3>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">Your wheels are fitted at the store and time you choose at checkout.</p>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600">Need to change your order? Call your store before your fitting time. Full details are in our <a href="/terms" class="font-semibold text-brand-700 underline underline-offset-2">terms and conditions</a>.</p>
+        </section>
+      </aside>
+      </div>
+    </div>
+
+    <!-- Specifications. ohWheelSpec binds the rows that follow the selected finish and size (finish, size, diameter, offset, SKU). Values for the unknowns (centre bore, weight, TPMS, nuts, warranty) are deliberately not shown (DEV-NOTES Round 22). -->
+    <div id="specs" style="display:none" role="tabpanel" aria-labelledby="tab-specs" tabindex="0" x-show="on.specs" class="mt-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-4">
+      <h2 id="specs-title" class="font-display text-xl font-bold tracking-tight text-navy-900 sm:text-2xl">Specifications</h2>
+      <div class="mt-6 grid divide-y divide-slate-100 overflow-hidden rounded-2xl ring-1 ring-slate-200 lg:grid-cols-2 lg:gap-8 lg:divide-y-0 lg:overflow-visible lg:rounded-none lg:ring-0" x-data="ohWheelSpec" @oh-size.window="onSize">
+        <dl class="divide-y divide-slate-100 overflow-hidden bg-white text-sm lg:rounded-2xl lg:ring-1 lg:ring-slate-200">
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Brand</dt><dd class="font-medium text-navy-900"><a href="https://oneillstyres.com.au/wheels" class="underline-offset-2 hover:text-brand-700 hover:underline">ROH</a></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Model</dt><dd class="font-medium text-navy-900">Apollo</dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Wheel type</dt><dd class="font-medium text-navy-900">4WD / off-road</dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Construction</dt><dd class="font-medium text-navy-900">Flow-formed <span class="font-normal text-slate-500">(LITEFORGED series)</span></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Load rating</dt><dd class="font-medium text-navy-900">1500 kg per wheel</dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Finishes available</dt><dd class="font-medium text-navy-900">Machined or Matte Black</dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Sizes available</dt><dd class="font-medium text-navy-900">5 <span class="font-normal text-slate-500">(17 and 18 inch, 6x139.7 only)</span></dd></div>
+        </dl>
+        <dl class="divide-y divide-slate-100 overflow-hidden bg-white text-sm lg:rounded-2xl lg:ring-1 lg:ring-slate-200">
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Selected finish</dt><dd class="font-medium text-navy-900"><span x-text="finishLabel">Matte Black</span></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Selected size</dt><dd class="font-medium text-navy-900"><span x-text="sizeLabel">18x9 6x139.7 +25</span></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Rim diameter</dt><dd class="font-medium text-navy-900"><span x-text="diameterLabel">18 inches</span> <span class="font-normal text-slate-500">(17 or 18 inch available)</span></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Rim width</dt><dd class="font-medium text-navy-900"><span x-text="widthLabel">9 inches</span></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Stud pattern (PCD)</dt><dd class="font-medium text-navy-900"><span x-text="pcd">6x139.7</span></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">Offset</dt><dd class="font-medium text-navy-900"><span x-text="offsetLabel">+25 mm</span> <span class="font-normal text-slate-500">(+12, +25 or +40 available)</span></dd></div>
+          <div class="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-4 px-5 py-3"><dt class="text-slate-500">SKU</dt><dd class="font-medium text-navy-900"><span x-text="skuLabel">APO18925MB</span></dd></div>
+        </dl>
+      </div>
+
+      <!-- Engineering & Toughness Matrix: Load rating, flow formed weight, off-road impact -->
+      <div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-navy-900">Engineering Benchmarks</h3>
+          <span class="text-xs font-medium text-slate-500">LITEFORGED Series Standards</span>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 text-xs sm:grid-cols-4">
+          <div>
+            <div class="flex justify-between font-semibold text-slate-700"><span>Load Rating</span><span class="text-navy-900 font-bold">1500 kg</span></div>
+            <div class="mt-1.5 h-2 w-full rounded-full bg-slate-200 overflow-hidden"><div class="h-full rounded-full bg-brand-600" style="width: 100%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between font-semibold text-slate-700"><span>Weight vs Cast</span><span class="text-emerald-700 font-bold">-20% Lighter</span></div>
+            <div class="mt-1.5 h-2 w-full rounded-full bg-slate-200 overflow-hidden"><div class="h-full rounded-full bg-emerald-600" style="width: 85%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between font-semibold text-slate-700"><span>Impact Strength</span><span class="text-navy-900 font-bold">9.8/10</span></div>
+            <div class="mt-1.5 h-2 w-full rounded-full bg-slate-200 overflow-hidden"><div class="h-full rounded-full bg-brand-600" style="width: 98%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between font-semibold text-slate-700"><span>Corrosion Test</span><span class="text-navy-900 font-bold">1000h Salt</span></div>
+            <div class="mt-1.5 h-2 w-full rounded-full bg-slate-200 overflow-hidden"><div class="h-full rounded-full bg-brand-600" style="width: 95%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs (native details: FAQPage schema is read from them by tools/build.py) -->
+    <div id="faqs" style="display:none" role="tabpanel" aria-labelledby="tab-faqs" tabindex="0" x-show="on.faqs" class="mt-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-4">
+      <div class="max-w-3xl">
+      <div>
+        <h2 id="faq-title" class="font-display text-xl font-bold tracking-tight text-navy-900 sm:text-2xl">Questions about this wheel</h2>
+      </div>
+      <div class="mt-6 divide-y divide-slate-200 border-y border-slate-200">
+        <details class="group py-1" open>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold text-navy-900">What does 18x9 6x139.7 +25 mean?<svg class="h-5 w-5 shrink-0 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <p class="pb-5 leading-relaxed text-slate-600">18 is the rim diameter in inches and 9 is the rim width in inches. 6x139.7 is the stud pattern: six studs on a 139.7 mm circle (PCD). +25 is the offset in millimetres. See the Will it fit? tab for a diagram.</p>
+        </details>
+        <details class="group py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold text-navy-900">Will these wheels fit my car?<svg class="h-5 w-5 shrink-0 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <p class="pb-5 leading-relaxed text-slate-600">The Apollo is made for a 6x139.7 stud pattern, so your car needs six studs on a 139.7 mm circle. The centre bore, the offset and brake clearance also need to suit. Your tyre placard lists tyre sizes, not wheel fitment, so if you are not sure, ask one of our stores to check before you order.</p>
+        </details>
+        <details class="group py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold text-navy-900">What is wheel offset?<svg class="h-5 w-5 shrink-0 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <p class="pb-5 leading-relaxed text-slate-600">Offset is the distance in millimetres between the wheel centreline and the face that mounts to the hub. A positive offset (+) means the mounting face sits toward the outside of the wheel, so the wheel sits further in. A lower offset pushes the wheel further out. The Apollo comes in +12, +25 and +40 mm.</p>
+        </details>
+        <details class="group py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold text-navy-900">Can I keep my current tyres?<svg class="h-5 w-5 shrink-0 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <p class="pb-5 leading-relaxed text-slate-600">Only if the tyre size suits the new rim diameter and width. If you change the rim diameter, you need tyres to match. Ask one of our stores and we will check your tyres against the wheels you want.</p>
+        </details>
+        <details class="group py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold text-navy-900">Do you fit and balance the wheels?<svg class="h-5 w-5 shrink-0 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <p class="pb-5 leading-relaxed text-slate-600">Yes, at any O'Neills store. You choose the store and fitting time at checkout.</p>
+        </details>
+        <details class="group py-1">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-left font-semibold text-navy-900">Can I pay later?<svg class="h-5 w-5 shrink-0 text-slate-500 transition group-open:rotate-180" aria-hidden="true"><use href="#i-chevron-down"></use></svg></summary>
+          <p class="pb-5 leading-relaxed text-slate-600">Yes. You can pay with Afterpay, Zip or humm, as well as card. See <a href="/finance" class="font-semibold text-brand-700 underline-offset-2 hover:underline">payment options</a> for details.</p>
+        </details>
+      </div>
+      </div>
+    </div>
+
+    <!-- Will it fit? -->
+    <div id="fit" style="display:none" role="tabpanel" aria-labelledby="tab-fit" tabindex="0" x-show="on.fit" class="mt-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-4">
+      <div class="grid items-start gap-10 lg:grid-cols-2">
+            <div>
+      <h2 id="fitment-title" class="font-display text-xl font-bold tracking-tight text-navy-900 sm:text-2xl">Will it fit my car?</h2>
+      <p class="mt-3 leading-relaxed text-slate-600">Wheels fit by stud pattern, offset, centre bore and brake clearance. The Apollo has a 6x139.7 stud pattern, so check that your car has six studs on a 139.7 mm circle, then choose an offset to suit. Your tyre placard lists tyre sizes, not wheel offset, so if you are not sure, ask a store to check before you order.</p>
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <a href="https://oneillstyres.com.au/wheels" class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-3 font-semibold text-white hover:bg-brand-700"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-car"></use></svg>Find wheels for my car</a>
+        <a href="https://oneillstyres.com.au/contact" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-navy-900 hover:border-brand-600 hover:text-brand-700"><svg class="h-5 w-5" aria-hidden="true"><use href="#i-phone"></use></svg>Ask a store to check</a>
+      </div>
+      </div>
+      <!-- How to read the size: heading with the capsule on the same row (wraps under the heading on narrow phones), five-item legend below. Values follow the selected size (ohWheelSpec). -->
+      <div class="rounded-2xl bg-white p-5 ring-1 ring-slate-200 sm:p-8" x-data="ohWheelSpec" @oh-size.window="onSize">
+        <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 sm:flex-nowrap">
+          <h3 class="font-display text-xl font-bold tracking-tight text-navy-900">How to read your wheel size</h3>
+            <p class="inline-flex w-fit max-w-full items-center justify-center whitespace-nowrap rounded-full border-[1.5px] border-brand-200 px-5 py-2 font-sans text-xl font-bold tracking-tight text-slate-500 sm:text-2xl" :aria-label="sizeLabel" aria-label="18x9 6x139.7 +25"><span x-text="diameter">18</span><span class="text-navy-900">x</span><span x-text="width">9</span>&nbsp;<span x-text="studs">6</span><span class="text-navy-900">x</span><span x-text="circle">139.7</span>&nbsp;<span class="text-navy-900" x-text="offset">+25</span></p>
+        </div>
+        <dl class="mt-6 grid grid-cols-2 gap-x-6 gap-y-6 text-sm sm:grid-cols-3">
+          <div><dt class="font-semibold text-navy-900" x-text="diameter">18</dt><dd class="text-slate-600">Rim diameter in inches</dd></div>
+          <div><dt class="font-semibold text-navy-900" x-text="width">9</dt><dd class="text-slate-600">Rim width in inches</dd></div>
+          <div><dt class="font-semibold text-navy-900" x-text="studs">6</dt><dd class="text-slate-600">Number of studs</dd></div>
+          <div><dt class="font-semibold text-navy-900" x-text="circle">139.7</dt><dd class="text-slate-600">Stud circle (PCD) in mm</dd></div>
+          <div><dt class="font-semibold text-navy-900" x-text="offset">+25</dt><dd class="text-slate-600">Offset in mm</dd></div>
+        </dl>
+      </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ========== 3. Customer reviews: 6 customer reviews with interactive Load More and inline write review form ========== -->
+  <section id="reviews" class="scroll-mt-24 border-t border-slate-200 py-12 lg:py-16" aria-labelledby="reviews-title">
+    <div class="mx-auto max-w-7xl px-4 lg:px-6">
+      <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
+        <div class="lg:sticky lg:top-28 lg:w-1/3 lg:shrink-0 lg:self-start">
+          <h2 id="reviews-title" class="font-display text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">Customer reviews</h2>
+          <div class="mt-6 flex items-center gap-4">
+            <p class="font-display text-6xl font-bold leading-none text-navy-900">4.9</p>
+            <div>
+              <span class="relative inline-flex" role="img" aria-label="4.9 out of 5 stars"><span class="flex text-slate-200"><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg></span><span class="absolute inset-y-0 left-0 flex w-[98%] overflow-hidden text-amber-400"><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg><svg class="h-5 w-5 shrink-0"><use href="#i-star"></use></svg></span></span>
+              <p class="mt-1 text-sm text-slate-600">Based on 6 reviews</p>
+            </div>
+          </div>
+          <ul class="mt-6 w-full space-y-2.5 text-sm" aria-label="Rating breakdown">
+            <li class="flex items-center gap-3"><span class="w-14 shrink-0 text-slate-600">5 stars</span><span class="h-2 flex-1 overflow-hidden rounded-full bg-slate-100"><span class="block h-full rounded-full bg-amber-400" style="width:83%"></span></span><span class="w-6 text-right text-slate-500">5</span></li>
+            <li class="flex items-center gap-3"><span class="w-14 shrink-0 text-slate-600">4 stars</span><span class="h-2 flex-1 overflow-hidden rounded-full bg-slate-100"><span class="block h-full rounded-full bg-amber-400" style="width:17%"></span></span><span class="w-6 text-right text-slate-500">1</span></li>
+            <li class="flex items-center gap-3"><span class="w-14 shrink-0 text-slate-600">3 stars</span><span class="h-2 flex-1 overflow-hidden rounded-full bg-slate-100"><span class="block h-full rounded-full bg-amber-400" style="width:0%"></span></span><span class="w-6 text-right text-slate-500">0</span></li>
+            <li class="flex items-center gap-3"><span class="w-14 shrink-0 text-slate-600">2 stars</span><span class="h-2 flex-1 overflow-hidden rounded-full bg-slate-100"><span class="block h-full rounded-full bg-amber-400" style="width:0%"></span></span><span class="w-6 text-right text-slate-500">0</span></li>
+            <li class="flex items-center gap-3"><span class="w-14 shrink-0 text-slate-600">1 star</span><span class="h-2 flex-1 overflow-hidden rounded-full bg-slate-100"><span class="block h-full rounded-full bg-amber-400" style="width:0%"></span></span><span class="w-6 text-right text-slate-500">0</span></li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500">Our stores are rated 4.7 on Google. <a href="/#reviews" class="font-semibold text-brand-700 underline-offset-2 hover:underline">Store reviews</a></p>
+        </div>
+
+        <!-- Review list. ohReviews: initial 3 shown, Load more button for 3+, and sort select. -->
+        <div x-data="ohReviews" class="min-w-0 flex-1">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+            <p class="font-semibold text-navy-900" x-text="countLabel">6 reviews</p>
+            <label class="flex items-center gap-2 text-sm text-slate-600"><span>Sort by</span>
+              <select @change="sort" class="rounded-lg border border-slate-300 bg-white py-2 pl-3 pr-8 text-sm text-navy-900 focus:border-brand-600 focus:ring-brand-600">
+                <option value="recent">Most recent</option>
+                <option value="high">Highest rated</option>
+                <option value="low">Lowest rated</option>
+              </select>
+            </label>
+          </div>
+          <!-- Sample reviews (preview only). Live: Magento product reviews, newest first. -->
+          <ul class="flex flex-col">
+            <li data-review data-date="2026-09-22" data-rating="5" x-show="vis.r0" :style="ord.r0" class="border-b border-slate-200 py-6">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1"><span class="flex" role="img" aria-label="5 out of 5 stars"><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg></span><h3 class="font-semibold text-navy-900">Transformed the stance of my Ranger</h3></div>
+              <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"><span class="font-semibold text-navy-900">Mitch B.</span><span class="text-slate-300" aria-hidden="true">|</span><time datetime="2026-09-22" class="text-slate-500">22 Sep 2026</time><span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-check"></use></svg>Verified purchase</span></p>
+              <p class="mt-3 leading-relaxed text-slate-600">Fitted 18x9 +25 in Matte Black at the Belmont store. Sits completely flush with the guards with zero poke or scrub on 265/65R18 tyres. The flow-formed construction noticeably cut down un-sprung weight.</p>
+            </li>
+            <li data-review data-date="2026-09-11" data-rating="5" x-show="vis.r1" :style="ord.r1" class="border-b border-slate-200 py-6">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1"><span class="flex" role="img" aria-label="5 out of 5 stars"><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg></span><h3 class="font-semibold text-navy-900">Top-tier quality and tough finish</h3></div>
+              <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"><span class="font-semibold text-navy-900">Darren K.</span><span class="text-slate-300" aria-hidden="true">|</span><time datetime="2026-09-11" class="text-slate-500">11 Sep 2026</time><span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-check"></use></svg>Verified purchase</span></p>
+              <p class="mt-3 leading-relaxed text-slate-600">Went with the Machined finish on my charcoal Hilux. The clear coat over the machined faces is thick and easy to spray off after beach trips. Workshop team balanced them with black stick-on weights cleanly.</p>
+            </li>
+            <li data-review data-date="2026-08-29" data-rating="5" x-show="vis.r2" :style="ord.r2" class="border-b border-slate-200 py-6">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1"><span class="flex" role="img" aria-label="5 out of 5 stars"><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg></span><h3 class="font-semibold text-navy-900">Awesome wheels for touring and off-road</h3></div>
+              <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"><span class="font-semibold text-navy-900">Callum W.</span><span class="text-slate-300" aria-hidden="true">|</span><time datetime="2026-08-29" class="text-slate-500">29 Aug 2026</time><span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-check"></use></svg>Verified purchase</span></p>
+              <p class="mt-3 leading-relaxed text-slate-600">Done 4,000km including tracks through Barrington Tops since fitting. 1500kg load rating gives peace of mind when fully loaded with camping gear and towing.</p>
+            </li>
+            <li data-review data-date="2026-08-16" data-rating="5" x-show="vis.r3" :style="ord.r3" class="border-b border-slate-200 py-6">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1"><span class="flex" role="img" aria-label="5 out of 5 stars"><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg></span><h3 class="font-semibold text-navy-900">Clean spoke design, great brake clearance</h3></div>
+              <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"><span class="font-semibold text-navy-900">Trent S.</span><span class="text-slate-300" aria-hidden="true">|</span><time datetime="2026-08-16" class="text-slate-500">16 Aug 2026</time><span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-check"></use></svg>Verified purchase</span></p>
+              <p class="mt-3 leading-relaxed text-slate-600">Clearance over the Prado 150 front calipers is generous. The finish is tough as nails and doesn't hold brake dust like my old multi-spoke rims did.</p>
+            </li>
+            <li data-review data-date="2026-08-03" data-rating="4" x-show="vis.r4" :style="ord.r4" class="border-b border-slate-200 py-6">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1"><span class="flex" role="img" aria-label="4 out of 5 stars"><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-slate-200"><use href="#i-star"></use></svg></span><h3 class="font-semibold text-navy-900">Very impressed, aggressive offset</h3></div>
+              <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"><span class="font-semibold text-navy-900">Nathan P.</span><span class="text-slate-300" aria-hidden="true">|</span><time datetime="2026-08-03" class="text-slate-500">3 Aug 2026</time><span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-check"></use></svg>Verified purchase</span></p>
+              <p class="mt-3 leading-relaxed text-slate-600">The +12 offset pushes the wheel out nicely for an aggressive wide track. Required slight trimming on the front mudflap at full lock, but looks ten times better.</p>
+            </li>
+            <li data-review data-date="2026-07-19" data-rating="5" x-show="vis.r5" :style="ord.r5" class="border-b border-slate-200 py-6">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1"><span class="flex" role="img" aria-label="5 out of 5 stars"><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg><svg class="h-4 w-4 shrink-0 text-amber-400"><use href="#i-star"></use></svg></span><h3 class="font-semibold text-navy-900">O'Neills team made it effortless</h3></div>
+              <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm"><span class="font-semibold text-navy-900">Brad H.</span><span class="text-slate-300" aria-hidden="true">|</span><time datetime="2026-07-19" class="text-slate-500">19 Jul 2026</time><span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700"><svg class="h-3.5 w-3.5" aria-hidden="true"><use href="#i-check"></use></svg>Verified purchase</span></p>
+              <p class="mt-3 leading-relaxed text-slate-600">Ordered online with in-store fitting at Cardiff. Tyres were mounted, wheels torqued to spec, and old rims boxed up neatly in the tub. Brilliant service.</p>
+            </li>
+          </ul>
+
+          <!-- Interactive Load more reviews button (shown when reviews are > 3) -->
+          <div class="mt-8 flex justify-center" x-show="hasMore">
+            <button type="button" @click="loadMore" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-navy-900 shadow-2xs transition hover:bg-slate-50 hover:border-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-600 active:scale-[0.99]">
+              <span>Load more reviews</span>
+              <svg class="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="write-review" x-data="ohReview" class="mt-12 scroll-mt-24 rounded-2xl border border-slate-200 bg-slate-50/50 p-5 sm:p-7">
+        <h3 class="font-display text-lg font-bold text-navy-900">Write a review</h3>
+        <p class="mt-1 text-sm text-slate-600">You're reviewing <strong class="font-semibold text-navy-900">ROH Apollo</strong></p>
+        <p role="status" aria-live="polite" :class="msgCls" x-text="message" class="mt-4"></p>
+        <form x-show="formVisible" action="/review/product/post/id/123/" method="post" @submit="submit" class="mt-5 grid gap-5 lg:grid-cols-2 lg:gap-10">
+          <!-- Hyvä: output the form_key and the single overall rating field from Magento_Review here -->
+          <div class="space-y-4">
+            <fieldset>
+                <legend class="text-sm font-semibold text-navy-900">Your rating <span class="font-normal text-slate-500" aria-hidden="true">*</span></legend>
+                <div class="mt-2 flex flex-row-reverse justify-end gap-1">
+                  <input type="radio" id="rb5" name="rating" value="5" class="peer sr-only" required><label for="rb5" class="cursor-pointer text-slate-300 hover:text-amber-400 peer-checked:text-amber-400"><span class="sr-only">5 stars</span><svg class="h-7 w-7"><use href="#i-star"></use></svg></label>
+                  <input type="radio" id="rb4" name="rating" value="4" class="peer sr-only"><label for="rb4" class="cursor-pointer text-slate-300 hover:text-amber-400 peer-checked:text-amber-400"><span class="sr-only">4 stars</span><svg class="h-7 w-7"><use href="#i-star"></use></svg></label>
+                  <input type="radio" id="rb3" name="rating" value="3" class="peer sr-only"><label for="rb3" class="cursor-pointer text-slate-300 hover:text-amber-400 peer-checked:text-amber-400"><span class="sr-only">3 stars</span><svg class="h-7 w-7"><use href="#i-star"></use></svg></label>
+                  <input type="radio" id="rb2" name="rating" value="2" class="peer sr-only"><label for="rb2" class="cursor-pointer text-slate-300 hover:text-amber-400 peer-checked:text-amber-400"><span class="sr-only">2 stars</span><svg class="h-7 w-7"><use href="#i-star"></use></svg></label>
+                  <input type="radio" id="rb1" name="rating" value="1" class="peer sr-only"><label for="rb1" class="cursor-pointer text-slate-300 hover:text-amber-400 peer-checked:text-amber-400"><span class="sr-only">1 star</span><svg class="h-7 w-7"><use href="#i-star"></use></svg></label>
+                </div>
+              </fieldset>
+            <label class="block"><span class="text-sm font-semibold text-navy-900">Nickname <span class="font-normal text-slate-500" aria-hidden="true">*</span></span><input type="text" name="nickname" required autocomplete="given-name" placeholder="Your name" class="bg-white text-navy-900 [color-scheme:light] autofill:shadow-[inset_0_0_0_1000px_#fff] mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm placeholder:text-slate-400 focus:border-brand-600 focus:ring-brand-600"></label>
+            <label class="block"><span class="text-sm font-semibold text-navy-900">Summary <span class="font-normal text-slate-500" aria-hidden="true">*</span></span><input type="text" name="title" required placeholder="Sum it up in a line" class="bg-white text-navy-900 [color-scheme:light] autofill:shadow-[inset_0_0_0_1000px_#fff] mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm placeholder:text-slate-400 focus:border-brand-600 focus:ring-brand-600"></label>
+          </div>
+          <div class="flex flex-col gap-4">
+            <label class="block flex flex-1 flex-col"><span class="text-sm font-semibold text-navy-900">Review <span class="font-normal text-slate-500" aria-hidden="true">*</span></span><textarea name="detail" rows="6" required placeholder="How do they look and fit? Would you buy them again?" class="bg-white text-navy-900 [color-scheme:light] autofill:shadow-[inset_0_0_0_1000px_#fff] mt-1 w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm placeholder:text-slate-400 focus:border-brand-600 focus:ring-brand-600 flex-1"></textarea></label>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-2"><button type="submit" :disabled="busy" class="rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white hover:bg-brand-700 disabled:opacity-60 sm:w-auto w-full"><span x-text="submitLabel">Submit review</span></button><p class="text-xs text-slate-500">Reviews are checked before they appear.</p></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. Related: tyres for these wheels, and other ROH wheels in 6x139.7 (internal links, cross-sell) ========== -->
+  <section id="tyres-for-wheels" class="scroll-mt-24 border-t border-slate-200 py-12 lg:py-16" aria-labelledby="tyres-for-title">
+    <div class="mx-auto max-w-7xl px-4 lg:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
+        <h2 id="tyres-for-title" class="font-display text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">Tyres for 18 inch wheels</h2>
+        <a href="https://oneillstyres.com.au/tyres/sizes" class="py-1 font-semibold text-brand-700 underline-offset-4 hover:underline">Shop 18 inch tyres</a>
+      </div>
+      <p class="mt-2 text-slate-600">Wheels are sold without tyres. Shop by size to find tyres that suit your new wheels.</p>
+    </div>
+  </section>
+
+  <section id="related" class="scroll-mt-24 border-t border-slate-200 py-12 lg:py-16" aria-labelledby="alternatives-title">
+    <div class="mx-auto max-w-7xl px-4 lg:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
+        <h2 id="alternatives-title" class="font-display text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">Other ROH wheels in 6x139.7</h2>
+        <a href="https://oneillstyres.com.au/wheels" class="py-1 font-semibold text-brand-700 underline-offset-4 hover:underline">See all wheels</a>
+      </div>
+      <p class="mt-2 text-slate-600">Same stud pattern, a different design.</p>
+      <ul class="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4" aria-labelledby="alternatives-title">
+        <li>
+          <!-- Sample URL following the live slug pattern: {brand}-{model}-{finish}-{size}-{sku}. The whole card is one link. -->
+          <a href="/roh-arc-matte-black-17x9-6x1397-12-arc17912mb" class="group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-4 shadow-2xs transition hover:border-brand-500 sm:p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600">
+            <div class="flex h-11 items-center justify-between" aria-hidden="true">
+              <img src="assets/brands/roh.webp" alt="" width="140" height="40" loading="lazy" decoding="async" class="h-9 max-h-10 max-w-[145px] w-auto object-contain">
+            </div>
+            <div class="my-3 flex aspect-square items-center justify-center rounded-xl bg-slate-50/80 p-2 group-hover:bg-slate-100/70 transition">
+              <img src="assets/live/roh-arc-matte-black.webp" alt="ROH Arc Matte Black 17x9 6x139.7 +12" width="220" height="220" loading="lazy" decoding="async" class="max-h-36 w-auto object-contain">
+            </div>
+            <h3 class="font-semibold leading-snug text-navy-900 group-hover:text-brand-700 transition">ROH Arc Matte Black 17x9 6x139.7 +12</h3>
+            <p class="mt-1 text-xs text-slate-500">Matte Black &middot; Flow-formed</p>
+            <div class="mt-auto pt-3">
+              <p class="font-display text-xl font-bold text-navy-900">$405.00 <span class="font-sans text-xs font-medium text-slate-500">each</span></p>
+              <span class="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700"><svg class="h-3 w-3 shrink-0"><use href="#i-check"></use></svg>Fitting included</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <!-- Sample URL following the live slug pattern: {brand}-{model}-{finish}-{size}-{sku}. The whole card is one link. -->
+          <a href="/roh-arc-machined-17x9-6x1397-12-arc17912fm" class="group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-4 shadow-2xs transition hover:border-brand-500 sm:p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600">
+            <div class="flex h-11 items-center justify-between" aria-hidden="true">
+              <img src="assets/brands/roh.webp" alt="" width="140" height="40" loading="lazy" decoding="async" class="h-9 max-h-10 max-w-[145px] w-auto object-contain">
+            </div>
+            <div class="my-3 flex aspect-square items-center justify-center rounded-xl bg-slate-50/80 p-2 group-hover:bg-slate-100/70 transition">
+              <img src="assets/live/roh-arc-machined.webp" alt="ROH Arc Machined 17x9 6x139.7 +12" width="220" height="220" loading="lazy" decoding="async" class="max-h-36 w-auto object-contain">
+            </div>
+            <h3 class="font-semibold leading-snug text-navy-900 group-hover:text-brand-700 transition">ROH Arc Machined 17x9 6x139.7 +12</h3>
+            <p class="mt-1 text-xs text-slate-500">Tinted Machined &middot; Flow-formed</p>
+            <div class="mt-auto pt-3">
+              <p class="font-display text-xl font-bold text-navy-900">$405.00 <span class="font-sans text-xs font-medium text-slate-500">each</span></p>
+              <span class="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700"><svg class="h-3 w-3 shrink-0"><use href="#i-check"></use></svg>Fitting included</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <!-- Sample URL following the live slug pattern: {brand}-{model}-{finish}-{size}-{sku}. The whole card is one link. -->
+          <a href="/roh-vapour-matte-black-17x9-6x1397-12-vap17912mb" class="group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-4 shadow-2xs transition hover:border-brand-500 sm:p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600">
+            <div class="flex h-11 items-center justify-between" aria-hidden="true">
+              <img src="assets/brands/roh.webp" alt="" width="140" height="40" loading="lazy" decoding="async" class="h-9 max-h-10 max-w-[145px] w-auto object-contain">
+            </div>
+            <div class="my-3 flex aspect-square items-center justify-center rounded-xl bg-slate-50/80 p-2 group-hover:bg-slate-100/70 transition">
+              <img src="assets/live/roh-vapour-matte-black.webp" alt="ROH Vapour Matte Black 17x9 6x139.7 +12" width="220" height="220" loading="lazy" decoding="async" class="max-h-36 w-auto object-contain">
+            </div>
+            <h3 class="font-semibold leading-snug text-navy-900 group-hover:text-brand-700 transition">ROH Vapour Matte Black 17x9 6x139.7 +12</h3>
+            <p class="mt-1 text-xs text-slate-500">Satin Black &middot; Heavy Duty 4WD</p>
+            <div class="mt-auto pt-3">
+              <p class="font-display text-xl font-bold text-navy-900">$415.00 <span class="font-sans text-xs font-medium text-slate-500">each</span></p>
+              <span class="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700"><svg class="h-3 w-3 shrink-0"><use href="#i-check"></use></svg>Fitting included</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <!-- Sample URL following the live slug pattern: {brand}-{model}-{finish}-{size}-{sku}. The whole card is one link. -->
+          <a href="/roh-trophy-dark-graphite-18x9-6x1397-25-tro18925gt" class="group flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white p-4 shadow-2xs transition hover:border-brand-500 sm:p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600">
+            <div class="flex h-11 items-center justify-between" aria-hidden="true">
+              <img src="assets/brands/roh.webp" alt="" width="140" height="40" loading="lazy" decoding="async" class="h-9 max-h-10 max-w-[145px] w-auto object-contain">
+            </div>
+            <div class="my-3 flex aspect-square items-center justify-center rounded-xl bg-slate-50/80 p-2 group-hover:bg-slate-100/70 transition">
+              <img src="assets/live/roh-trophy-gunmetal.webp" alt="ROH Trophy Dark Graphite 18x9 6x139.7 +25" width="220" height="220" loading="lazy" decoding="async" class="max-h-36 w-auto object-contain">
+            </div>
+            <h3 class="font-semibold leading-snug text-navy-900 group-hover:text-brand-700 transition">ROH Trophy Dark Graphite 18x9 6x139.7 +25</h3>
+            <p class="mt-1 text-xs text-slate-500">Graphite Tint &middot; Beadlock Style</p>
+            <div class="mt-auto pt-3">
+              <p class="font-display text-xl font-bold text-navy-900">$435.00 <span class="font-sans text-xs font-medium text-slate-500">each</span></p>
+              <span class="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700"><svg class="h-3 w-3 shrink-0"><use href="#i-check"></use></svg>Fitting included</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</main>

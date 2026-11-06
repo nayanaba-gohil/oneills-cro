@@ -1,0 +1,59 @@
+<!--
+  Store picker dialog (ohStorePicker). Shared by the homepage and the product pages: output once per page,
+  directly after the header. The trigger buttons live in each header and use the small ohStoreTrigger component,
+  which opens this dialog with the window event `oh-open-store-picker` and shows the chosen store's name.
+
+  It opens by itself the first time a visitor arrives, and never again once they pick a store or close it.
+  The choice lives in localStorage under 'oh-store'. In Hyvä, mirror it into a cookie or customer attribute so
+  the server can use it (default fitting store at checkout, phone in the header, stock by source).
+
+  The 8 stores come from STORES in js/oneills-home.js, so this markup holds no store data of its own.
+  The dialog is position: fixed, so it must not sit inside an element with a transform or filter.
+-->
+<div x-data="ohStorePicker" @keydown.escape.window="close" @oh-open-store-picker.window="show">
+  <div x-show="isOpen" x-cloak class="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-labelledby="oh-store-picker-title">
+    <div class="absolute inset-0 bg-navy-900/60" @click="close"
+         x-transition:enter="transition-opacity duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+
+    <div class="absolute inset-x-0 bottom-0 sm:inset-0 sm:flex sm:items-center sm:justify-center sm:p-4">
+      <div x-ref="panel" class="relative max-h-[85vh] w-full overflow-y-auto rounded-t-2xl bg-white p-5 shadow-2xl sm:max-w-3xl sm:rounded-2xl sm:p-7"
+           x-transition:enter="transition duration-200 ease-out" x-transition:enter-start="translate-y-6 opacity-0 sm:translate-y-0 sm:scale-95" x-transition:enter-end="translate-y-0 opacity-100 sm:scale-100"
+           x-transition:leave="transition duration-150 ease-in" x-transition:leave-start="translate-y-0 opacity-100 sm:scale-100" x-transition:leave-end="translate-y-6 opacity-0 sm:translate-y-0 sm:scale-95">
+
+        <div class="flex items-start justify-between gap-4 border-b border-slate-200 pb-4">
+          <div>
+            <h2 id="oh-store-picker-title" class="font-display text-xl font-bold text-navy-900 sm:text-2xl">Choose your store</h2>
+            <p class="mt-1 text-sm text-slate-600">We'll show you the right hours, phone number and fitting times.</p>
+          </div>
+          <button type="button" @click="close" class="-mr-1 -mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-navy-900">
+            <span class="sr-only">Close, and choose a store later</span>
+            <svg class="h-5 w-5" aria-hidden="true"><use href="#i-close"></use></svg>
+          </button>
+        </div>
+
+        <ul class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <template x-for="s in stores" :key="s.key">
+            <li>
+              <button type="button" :data-key="s.key" @click="choose" :class="cardCls[s.key]" :aria-current="current[s.key]"
+                      class="relative flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl border px-2 py-4 text-center">
+                <span x-show="tickShown[s.key]" x-cloak class="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white">
+                  <span class="sr-only">Selected</span>
+                  <svg class="h-3 w-3" aria-hidden="true"><use href="#i-check"></use></svg>
+                </span>
+                <svg class="h-7 w-7 text-brand-600" aria-hidden="true"><use href="#i-store"></use></svg>
+                <span class="text-sm font-semibold leading-tight text-navy-900" x-text="s.name">Store</span>
+                <span class="text-xs text-slate-500" x-text="s.area">Area</span>
+              </button>
+            </li>
+          </template>
+        </ul>
+
+        <p class="mt-5 border-t border-slate-200 pt-4 text-sm text-slate-600">
+          You can change this any time from the top of the page.
+          <a href="/#stores" class="font-semibold text-brand-700 underline-offset-2 hover:underline">Compare all 8 stores</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

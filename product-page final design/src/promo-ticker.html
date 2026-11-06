@@ -1,0 +1,71 @@
+<!--
+  Promo ticker (preview-promo-ticker.html). Sits at the very top of the page, above the blue utility bar. No JS.
+  SAMPLE copy mirroring the live homepage promos; the client confirms wording, dates and terms (DEV-NOTES Round 14).
+  Hyvä: move the <style> into the theme CSS (the keyframes and the three helper classes). The track holds the item list twice and
+  moves -50%, so the loop is seamless; the second copy is aria-hidden and its links are out of the tab order.
+  Hover or keyboard focus pauses it. With prefers-reduced-motion it does not animate: items show once and the bar scrolls sideways.
+-->
+<style>
+  @keyframes oh-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .oh-ticker-track { animation: oh-ticker 40s linear infinite; }
+  .oh-ticker:hover .oh-ticker-track, .oh-ticker:focus-within .oh-ticker-track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) {
+    .oh-ticker-track { animation: none; }
+    .oh-ticker-dup { display: none; }
+    .oh-ticker { overflow-x: auto; }
+  }
+</style>
+<section class="oh-ticker h-10 overflow-hidden bg-navy-900 text-sm text-white" aria-label="Current offers">
+  <div class="oh-ticker-track flex h-full w-max items-center whitespace-nowrap">
+    <ul class="flex shrink-0 items-center">
+      <li class="flex items-center">
+        <a href="https://oneillstyres.com.au/specials" class="flex items-center gap-2 px-4 font-medium underline-offset-4 hover:underline focus-visible:underline">
+          <svg class="h-4 w-4 shrink-0 text-white" aria-hidden="true"><use href="#i-tyre"></use></svg>Buy 3 tyres, get the 4th free</a>
+        <span class="h-1 w-1 rounded-full bg-white/50" aria-hidden="true"></span>
+      </li>
+      <li class="flex items-center">
+        <span class="flex items-center gap-2 px-4"><svg class="h-4 w-4 shrink-0 text-white" aria-hidden="true"><use href="#i-balance"></use></svg>Free fitting and balancing</span>
+        <span class="h-1 w-1 rounded-full bg-white/50" aria-hidden="true"></span>
+      </li>
+      <li class="flex items-center">
+        <a href="/finance" class="flex items-center gap-2 px-4 font-medium underline-offset-4 hover:underline focus-visible:underline">
+          <svg class="h-4 w-4 shrink-0 text-white" aria-hidden="true"><use href="#i-card"></use></svg>Afterpay, Zip and humm available</a>
+        <span class="h-1 w-1 rounded-full bg-white/50" aria-hidden="true"></span>
+      </li>
+      <li class="flex items-center">
+        <a href="https://oneillstyres.com.au/#reviews" class="flex items-center gap-2 px-4 font-medium underline-offset-4 hover:underline focus-visible:underline">
+          <svg class="h-4 w-4 shrink-0 text-amber-300" aria-hidden="true"><use href="#i-star"></use></svg>Rated 4.7 on Google</a>
+        <span class="h-1 w-1 rounded-full bg-white/50" aria-hidden="true"></span>
+      </li>
+      <li class="flex items-center">
+        <span class="flex items-center gap-2 px-4"><svg class="h-4 w-4 shrink-0 text-white" aria-hidden="true"><use href="#i-check"></use></svg>Eco tyre disposal included</span>
+        <span class="h-1 w-1 rounded-full bg-white/50" aria-hidden="true"></span>
+      </li>
+    </ul>
+    <ul class="oh-ticker-dup flex shrink-0 items-center" aria-hidden="true">
+      <li class="flex items-center">
+        <a href="https://oneillstyres.com.au/specials" tabindex="-1" class="flex items-center gap-2 px-4 font-medium underline-offset-4 hover:underline">
+          <svg class="h-4 w-4 shrink-0 text-white"><use href="#i-tyre"></use></svg>Buy 3 tyres, get the 4th free</a>
+        <span class="h-1 w-1 rounded-full bg-white/50"></span>
+      </li>
+      <li class="flex items-center">
+        <span class="flex items-center gap-2 px-4"><svg class="h-4 w-4 shrink-0 text-white"><use href="#i-balance"></use></svg>Free fitting and balancing</span>
+        <span class="h-1 w-1 rounded-full bg-white/50"></span>
+      </li>
+      <li class="flex items-center">
+        <a href="/finance" tabindex="-1" class="flex items-center gap-2 px-4 font-medium underline-offset-4 hover:underline">
+          <svg class="h-4 w-4 shrink-0 text-white"><use href="#i-card"></use></svg>Afterpay, Zip and humm available</a>
+        <span class="h-1 w-1 rounded-full bg-white/50"></span>
+      </li>
+      <li class="flex items-center">
+        <a href="https://oneillstyres.com.au/#reviews" tabindex="-1" class="flex items-center gap-2 px-4 font-medium underline-offset-4 hover:underline">
+          <svg class="h-4 w-4 shrink-0 text-amber-300"><use href="#i-star"></use></svg>Rated 4.7 on Google</a>
+        <span class="h-1 w-1 rounded-full bg-white/50"></span>
+      </li>
+      <li class="flex items-center">
+        <span class="flex items-center gap-2 px-4"><svg class="h-4 w-4 shrink-0 text-white"><use href="#i-check"></use></svg>Eco tyre disposal included</span>
+        <span class="h-1 w-1 rounded-full bg-white/50"></span>
+      </li>
+    </ul>
+  </div>
+</section>

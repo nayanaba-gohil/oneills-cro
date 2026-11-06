@@ -38,7 +38,7 @@ tailwind.config = {
 """ + r("schema/home-jsonld.html") + """</head>
 <body class="bg-white font-sans text-slate-700 antialiased">
 """
-body = r("src/icons.html") + r("src/header.html") + r("src/home-content.html") + r("src/footer.html")
+body = r("src/icons.html") + r("src/header.html") + r("src/store-picker.html") + r("src/home-content.html") + r("src/footer.html")
 # PREVIEW ONLY: sample review cards (clearly labelled, not real reviews) inlined so they also show when index.html is
 # opened straight from the folder (a fetch of a local file is blocked there). The Hyvä template keeps data-endpoint="".
 body = body.replace('x-data="ohReviews" data-endpoint=""', 'x-data="ohReviews" data-endpoint="" data-json="oh-reviews-preview"', 1)

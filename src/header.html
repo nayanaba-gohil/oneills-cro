@@ -19,7 +19,13 @@
       <svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-clock"></use></svg>
       <span>Mon to Fri 7:30am to 5pm, Sat 8am to 11:30am</span>
     </p>
-    <a href="#stores" class="hidden py-0.5 font-semibold text-white underline-offset-4 hover:underline sm:inline-block">Find a store</a>
+    <!-- Store picker trigger, before "Find a store". Shows the chosen store once one is set. -->
+    <div class="flex items-center gap-4" x-data="ohStoreTrigger">
+      <button type="button" @click="open" class="inline-flex items-center gap-1.5 py-0.5 font-semibold text-white underline-offset-4 hover:underline">
+        <svg class="h-4 w-4 shrink-0" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span x-text="label">Choose your store</span>
+      </button>
+      <a href="#stores" class="hidden py-0.5 font-semibold text-white underline-offset-4 hover:underline sm:inline-block">Find a store</a>
+    </div>
   </div>
 </div>
 
@@ -149,6 +155,12 @@
         </details>
         <a href="/specials" class="block px-4 py-4">Specials</a>
         <a href="/about" class="block px-4 py-4">About</a>
+        <!-- Mobile: the utility bar is hidden, so the store picker lives here -->
+        <div x-data="ohStoreTrigger">
+          <button type="button" @click="open" class="flex w-full items-center gap-3 px-4 py-4 text-left">
+            <svg class="h-5 w-5 text-brand-600" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span x-text="label">Choose your store</span>
+          </button>
+        </div>
         <a href="/wishlist" class="flex items-center gap-3 px-4 py-4"><svg class="h-5 w-5 text-slate-500" aria-hidden="true"><use href="#i-heart"></use></svg>Favourites</a>
         <a href="/customer/account" class="flex items-center gap-3 px-4 py-4"><svg class="h-5 w-5 text-slate-500" aria-hidden="true"><use href="#i-user"></use></svg>My account</a>
       </div>
@@ -158,22 +170,35 @@
 
 <!-- Promotions bar (sitewide, under the navigation): two banners, 5 seconds each, both link to /specials (ohPromo).
      Pauses on hover, on keyboard focus and with the pause button (WCAG 2.2.2); no auto-rotation with reduced motion.
-     Banners: assets/promos, 1920 x 226 (8.5:1) and 960 x 113. Bar height: full banner on phones; from 768px 40% shorter, centred, with side fills in each banner's edge colours (set per banner when swapping artwork). Each offer needs its terms and end date on /specials. -->
+
+     ARTWORK MUST BE 3:1. Supplied at 2172 x 724, delivered as 1920 x 640 and 960 x 320 WebP by
+     tools/promo_images.py, which warns if a new banner's ratio does not match. The bar uses exactly that ratio,
+     so the bar's height always equals the image's height and no filler band can appear, at any width including
+     phones. A banner at any other ratio gets cropped by object-cover rather than letterboxed.
+     Below 640px a squarer phone crop (*-phone.webp, 1.5:1) is used instead: a 3:1 strip is only 130px tall on a
+     390px phone (15% of the screen) against 53% on a 1440x900 desktop, so the phone version roughly doubles that.
+     Heights: 240px at 360 wide, 260px at 390 (31% of screen), capped at 290px, then the wide banner from 640px
+     (213px at 640, 427px at 1280, 475px at 1440). The cap needs w-full beside it, or CSS shrinks the container's
+     width to keep the aspect ratio.
+
+     KNOWN LIMIT: between about 430px and 640px the cap makes the container wider than 1.5:1, so object-cover
+     crops the phone image top and bottom and can clip the logo and the T&Cs line. True phone widths (360-430)
+     are unaffected. Supplying dedicated mobile artwork at 1080 x 720 with generous margins above and below the
+     text removes this; set it as the third field in JOBS in tools/promo_images.py.
+
+     Each offer needs its terms and end date on /specials. Both current banners carry "Terms & Conditions Apply"
+     in the artwork, and both state the offer period. -->
 <section class="bg-slate-100" aria-roledescription="carousel" aria-label="Current offers" x-data="ohPromo" data-interval="5000" @mouseenter="hold" @mouseleave="release" @focusin="hold" @focusout="release">
-  <div class="relative mx-auto aspect-[1920/226] max-w-[1920px] overflow-hidden md:aspect-[1920/136]">
+  <div class="relative mx-auto aspect-[1080/720] sm:aspect-[1920/640] w-full max-h-[290px] sm:max-h-none max-w-[1920px] overflow-hidden">
     <div role="group" aria-roledescription="slide" aria-label="1 of 2" data-promo class="absolute inset-0 overflow-hidden" x-show="shown.s0"
          x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
          x-transition:leave="transition-opacity duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-      <!-- From 768px the banner is 40% shorter and centred; the sides continue its own edge colours so the bar stays full width -->
-      <div class="absolute inset-0 hidden md:block" aria-hidden="true"><div class="absolute inset-y-0 left-0 w-1/2 bg-[#FED71D]"></div><div class="absolute inset-y-0 right-0 w-1/2 bg-[#082844]"></div></div>
-      <a href="/specials" class="relative flex h-full w-full justify-center"><img src="assets/promos/pirelli-20-off-1920.webp" srcset="assets/promos/pirelli-20-off-960.webp 960w, assets/promos/pirelli-20-off-1920.webp 1920w" sizes="(min-width: 1920px) 1152px, (min-width: 768px) 60vw, 100vw" alt="20% off selected Pirelli tyres. See current specials" width="1920" height="226" class="h-full w-full object-contain md:w-auto md:[-webkit-mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)] md:[mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]"></a>
+      <a href="/specials" class="block h-full w-full"><img src="assets/promos/toyo-buy3-get1-phone.webp" alt="Buy 3, get 1 free on Toyo CR1 and CR1 SUV tyres. Terms and conditions apply. See current specials" width="1080" height="720" class="h-full w-full object-cover sm:hidden"><img src="assets/promos/toyo-buy3-get1-1920.webp" srcset="assets/promos/toyo-buy3-get1-960.webp 960w, assets/promos/toyo-buy3-get1-1920.webp 1920w" sizes="100vw" alt="Buy 3, get 1 free on Toyo CR1 and CR1 SUV tyres. Terms and conditions apply. See current specials" width="1920" height="640" class="hidden h-full w-full object-cover sm:block"></a>
     </div>
     <div role="group" aria-roledescription="slide" aria-label="2 of 2" data-promo class="absolute inset-0 overflow-hidden" x-show="shown.s1" x-cloak
          x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
          x-transition:leave="transition-opacity duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-      <!-- From 768px the banner is 40% shorter and centred; the sides continue its own edge colours so the bar stays full width -->
-      <div class="absolute inset-0 hidden md:block" aria-hidden="true"><div class="absolute inset-y-0 left-0 w-1/2 bg-[#D71620]"></div><div class="absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(180deg,#F6F5F1,#F5E0DA_58%,#2C2C35_66%,#171A22)]"></div></div>
-      <a href="/specials" class="relative flex h-full w-full justify-center"><img src="assets/promos/buy-3-get-1-free-1920.webp" srcset="assets/promos/buy-3-get-1-free-960.webp 960w, assets/promos/buy-3-get-1-free-1920.webp 1920w" sizes="(min-width: 1920px) 1152px, (min-width: 768px) 60vw, 100vw" alt="Buy 3 tyres, get 1 free. See current specials" width="1920" height="226" loading="lazy" class="h-full w-full object-contain md:w-auto md:[-webkit-mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)] md:[mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]"></a>
+      <a href="/specials" class="block h-full w-full"><img src="assets/promos/yokohama-buy3-get1-phone.webp" alt="Buy 3, get 1 free across the whole Yokohama range. Terms and conditions apply. See current specials" width="1080" height="720" loading="lazy" class="h-full w-full object-cover sm:hidden"><img src="assets/promos/yokohama-buy3-get1-1920.webp" srcset="assets/promos/yokohama-buy3-get1-960.webp 960w, assets/promos/yokohama-buy3-get1-1920.webp 1920w" sizes="100vw" alt="Buy 3, get 1 free across the whole Yokohama range. Terms and conditions apply. See current specials" width="1920" height="640" loading="lazy" class="hidden h-full w-full object-cover sm:block"></a>
     </div>
     <!-- Controls: two dots and pause/play, 24px tap targets, bottom right (over the tyre artwork, clear of the offer text) -->
     <div class="absolute bottom-1 right-1.5 flex items-center rounded-full bg-white/85 px-0.5 shadow-sm sm:bottom-2 sm:right-3">

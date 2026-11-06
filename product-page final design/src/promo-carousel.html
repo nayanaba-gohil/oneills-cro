@@ -1,0 +1,58 @@
+<!--
+  Promo card carousel (preview-promo-carousel.html). Goes directly after the hero (buy box) section and before the tabs, so Add to cart stays in the first screen.
+  SAMPLE copy mirroring the live homepage promos; the client confirms wording, dates and terms (DEV-NOTES Round 14).
+  Touch swipe is native (overflow-x-auto, snap-x snap-mandatory, cards snap-start). Buttons and the 5 s auto-advance use ohCarousel (js/oneills-pdp.js).
+  Auto-advance pauses on hover, focus and touch, and while the tab is hidden; it does not run with prefers-reduced-motion.
+-->
+  <section class="mx-auto max-w-7xl px-4 pt-10 pb-10 lg:px-6" aria-labelledby="offers-title" x-data="ohCarousel"
+           @mouseenter="pause" @mouseleave="resume" @focusin="pause" @focusout="resume" @touchstart.passive="pause" @touchend.passive="resume">
+    <div class="flex items-center justify-between gap-4">
+      <h2 id="offers-title" class="font-display text-xl font-bold text-navy-900">Current offers</h2>
+      <div class="flex gap-2">
+        <button type="button" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-navy-900 hover:bg-slate-50" @click="prev" aria-label="Previous offer"><svg class="h-5 w-5 rotate-180" aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+        <button type="button" class="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-navy-900 hover:bg-slate-50" @click="next" aria-label="Next offer"><svg class="h-5 w-5 " aria-hidden="true"><use href="#i-arrow-right"></use></svg></button>
+      </div>
+    </div>
+    <ul x-ref="track" class="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <!-- Offer 1: Save Up To 25% -->
+      <li class="relative shrink-0 snap-start w-[78%] sm:w-[calc(50%-0.5rem)] lg:w-[calc((100%-3rem)/4)]">
+        <a href="https://oneillstyres.com.au/specials" class="group block overflow-hidden rounded-2xl bg-slate-900 shadow-md ring-1 ring-slate-900/10 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <div class="aspect-square w-full overflow-hidden bg-brand-900">
+            <img src="assets/offers/buy-4-save-25.webp" alt="%OFF — Buy 4 Tyres, Save Up To 25%. Seasonal discount across top global tyre brands. View Deals." class="h-full w-full object-cover" loading="lazy">
+          </div>
+          <span class="sr-only">%OFF — Buy 4 Tyres, Save Up To 25%. Seasonal discount across top global tyre brands. CTA: View Deals</span>
+        </a>
+      </li>
+
+      <!-- Offer 2: $100 Cashback -->
+      <li class="relative shrink-0 snap-start w-[78%] sm:w-[calc(50%-0.5rem)] lg:w-[calc((100%-3rem)/4)]">
+        <a href="https://oneillstyres.com.au/specials" class="group block overflow-hidden rounded-2xl bg-slate-900 shadow-md ring-1 ring-slate-900/10 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <div class="aspect-square w-full overflow-hidden bg-brand-900">
+            <img src="assets/offers/buy-4-cashback-100.webp" alt="CASHBACK — Buy 4 Tyres, Get $100 Cashback. Instant savings when purchasing a full set. Claim Offer." class="h-full w-full object-cover" loading="lazy">
+          </div>
+          <span class="sr-only">CASHBACK — Buy 4 Tyres, Get $100 Cashback. Instant savings when purchasing a full set. CTA: Claim Offer</span>
+        </a>
+      </li>
+
+      <!-- Offer 3: Buy 3 Get 1 Free -->
+      <li class="relative shrink-0 snap-start w-[78%] sm:w-[calc(50%-0.5rem)] lg:w-[calc((100%-3rem)/4)]">
+        <a href="https://oneillstyres.com.au/specials" class="group block overflow-hidden rounded-2xl bg-slate-900 shadow-md ring-1 ring-slate-900/10 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <div class="aspect-square w-full overflow-hidden bg-brand-900">
+            <img src="assets/offers/buy-3-get-1-free.webp" alt="FREE — Buy 3 Tyres, Get 1 Free. Available on selected premium tyre brands for a limited time. Shop Now." class="h-full w-full object-cover" loading="lazy">
+          </div>
+          <span class="sr-only">FREE — Buy 3 Tyres, Get 1 Free. Available on selected premium tyre brands for a limited time. CTA: Shop Now</span>
+        </a>
+      </li>
+
+      <!-- Offer 4: Brand Statement -->
+      <li class="relative shrink-0 snap-start w-[78%] sm:w-[calc(50%-0.5rem)] lg:w-[calc((100%-3rem)/4)]">
+        <a href="https://oneillstyres.com.au/about-us" class="group block overflow-hidden rounded-2xl bg-slate-900 shadow-md ring-1 ring-slate-900/10 focus:outline-none focus:ring-2 focus:ring-brand-500">
+          <div class="aspect-square w-full overflow-hidden bg-brand-900">
+            <img src="assets/offers/wheels-you-need-oneills.webp" alt="If you've got wheels, you need O'Neills" class="h-full w-full object-cover" loading="lazy">
+          </div>
+          <span class="sr-only">If you've got wheels, you need O'Neills</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+

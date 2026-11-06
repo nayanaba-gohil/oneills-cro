@@ -759,7 +759,13 @@ tailwind.config = {
       <svg class="h-4 w-4 shrink-0 text-brand-300" aria-hidden="true"><use href="#i-clock"></use></svg>
       <span>Mon to Fri 7:30am to 5pm, Sat 8am to 11:30am</span>
     </p>
-    <a href="#stores" class="hidden py-0.5 font-semibold text-white underline-offset-4 hover:underline sm:inline-block">Find a store</a>
+    <!-- Store picker trigger, before "Find a store". Shows the chosen store once one is set. -->
+    <div class="flex items-center gap-4" x-data="ohStoreTrigger">
+      <button type="button" @click="open" class="inline-flex items-center gap-1.5 py-0.5 font-semibold text-white underline-offset-4 hover:underline">
+        <svg class="h-4 w-4 shrink-0" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span x-text="label">Choose your store</span>
+      </button>
+      <a href="#stores" class="hidden py-0.5 font-semibold text-white underline-offset-4 hover:underline sm:inline-block">Find a store</a>
+    </div>
   </div>
 </div>
 
@@ -889,6 +895,12 @@ tailwind.config = {
         </details>
         <a href="/specials" class="block px-4 py-4">Specials</a>
         <a href="/about" class="block px-4 py-4">About</a>
+        <!-- Mobile: the utility bar is hidden, so the store picker lives here -->
+        <div x-data="ohStoreTrigger">
+          <button type="button" @click="open" class="flex w-full items-center gap-3 px-4 py-4 text-left">
+            <svg class="h-5 w-5 text-brand-600" aria-hidden="true"><use href="#i-pin-solid"></use></svg><span x-text="label">Choose your store</span>
+          </button>
+        </div>
         <a href="/wishlist" class="flex items-center gap-3 px-4 py-4"><svg class="h-5 w-5 text-slate-500" aria-hidden="true"><use href="#i-heart"></use></svg>Favourites</a>
         <a href="/customer/account" class="flex items-center gap-3 px-4 py-4"><svg class="h-5 w-5 text-slate-500" aria-hidden="true"><use href="#i-user"></use></svg>My account</a>
       </div>
@@ -898,22 +910,35 @@ tailwind.config = {
 
 <!-- Promotions bar (sitewide, under the navigation): two banners, 5 seconds each, both link to /specials (ohPromo).
      Pauses on hover, on keyboard focus and with the pause button (WCAG 2.2.2); no auto-rotation with reduced motion.
-     Banners: assets/promos, 1920 x 226 (8.5:1) and 960 x 113. Bar height: full banner on phones; from 768px 40% shorter, centred, with side fills in each banner's edge colours (set per banner when swapping artwork). Each offer needs its terms and end date on /specials. -->
+
+     ARTWORK MUST BE 3:1. Supplied at 2172 x 724, delivered as 1920 x 640 and 960 x 320 WebP by
+     tools/promo_images.py, which warns if a new banner's ratio does not match. The bar uses exactly that ratio,
+     so the bar's height always equals the image's height and no filler band can appear, at any width including
+     phones. A banner at any other ratio gets cropped by object-cover rather than letterboxed.
+     Below 640px a squarer phone crop (*-phone.webp, 1.5:1) is used instead: a 3:1 strip is only 130px tall on a
+     390px phone (15% of the screen) against 53% on a 1440x900 desktop, so the phone version roughly doubles that.
+     Heights: 240px at 360 wide, 260px at 390 (31% of screen), capped at 290px, then the wide banner from 640px
+     (213px at 640, 427px at 1280, 475px at 1440). The cap needs w-full beside it, or CSS shrinks the container's
+     width to keep the aspect ratio.
+
+     KNOWN LIMIT: between about 430px and 640px the cap makes the container wider than 1.5:1, so object-cover
+     crops the phone image top and bottom and can clip the logo and the T&Cs line. True phone widths (360-430)
+     are unaffected. Supplying dedicated mobile artwork at 1080 x 720 with generous margins above and below the
+     text removes this; set it as the third field in JOBS in tools/promo_images.py.
+
+     Each offer needs its terms and end date on /specials. Both current banners carry "Terms & Conditions Apply"
+     in the artwork, and both state the offer period. -->
 <section class="bg-slate-100" aria-roledescription="carousel" aria-label="Current offers" x-data="ohPromo" data-interval="5000" @mouseenter="hold" @mouseleave="release" @focusin="hold" @focusout="release">
-  <div class="relative mx-auto aspect-[1920/226] max-w-[1920px] overflow-hidden md:aspect-[1920/136]">
+  <div class="relative mx-auto aspect-[1080/720] sm:aspect-[1920/640] w-full max-h-[290px] sm:max-h-none max-w-[1920px] overflow-hidden">
     <div role="group" aria-roledescription="slide" aria-label="1 of 2" data-promo class="absolute inset-0 overflow-hidden" x-show="shown.s0"
          x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
          x-transition:leave="transition-opacity duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-      <!-- From 768px the banner is 40% shorter and centred; the sides continue its own edge colours so the bar stays full width -->
-      <div class="absolute inset-0 hidden md:block" aria-hidden="true"><div class="absolute inset-y-0 left-0 w-1/2 bg-[#FED71D]"></div><div class="absolute inset-y-0 right-0 w-1/2 bg-[#082844]"></div></div>
-      <a href="/specials" class="relative flex h-full w-full justify-center"><img src="assets/promos/pirelli-20-off-1920.webp" srcset="assets/promos/pirelli-20-off-960.webp 960w, assets/promos/pirelli-20-off-1920.webp 1920w" sizes="(min-width: 1920px) 1152px, (min-width: 768px) 60vw, 100vw" alt="20% off selected Pirelli tyres. See current specials" width="1920" height="226" class="h-full w-full object-contain md:w-auto md:[-webkit-mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)] md:[mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]"></a>
+      <a href="/specials" class="block h-full w-full"><img src="assets/promos/toyo-buy3-get1-phone.webp" alt="Buy 3, get 1 free on Toyo CR1 and CR1 SUV tyres. Terms and conditions apply. See current specials" width="1080" height="720" class="h-full w-full object-cover sm:hidden"><img src="assets/promos/toyo-buy3-get1-1920.webp" srcset="assets/promos/toyo-buy3-get1-960.webp 960w, assets/promos/toyo-buy3-get1-1920.webp 1920w" sizes="100vw" alt="Buy 3, get 1 free on Toyo CR1 and CR1 SUV tyres. Terms and conditions apply. See current specials" width="1920" height="640" class="hidden h-full w-full object-cover sm:block"></a>
     </div>
     <div role="group" aria-roledescription="slide" aria-label="2 of 2" data-promo class="absolute inset-0 overflow-hidden" x-show="shown.s1" x-cloak
          x-transition:enter="transition-opacity duration-500" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
          x-transition:leave="transition-opacity duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-      <!-- From 768px the banner is 40% shorter and centred; the sides continue its own edge colours so the bar stays full width -->
-      <div class="absolute inset-0 hidden md:block" aria-hidden="true"><div class="absolute inset-y-0 left-0 w-1/2 bg-[#D71620]"></div><div class="absolute inset-y-0 right-0 w-1/2 bg-[linear-gradient(180deg,#F6F5F1,#F5E0DA_58%,#2C2C35_66%,#171A22)]"></div></div>
-      <a href="/specials" class="relative flex h-full w-full justify-center"><img src="assets/promos/buy-3-get-1-free-1920.webp" srcset="assets/promos/buy-3-get-1-free-960.webp 960w, assets/promos/buy-3-get-1-free-1920.webp 1920w" sizes="(min-width: 1920px) 1152px, (min-width: 768px) 60vw, 100vw" alt="Buy 3 tyres, get 1 free. See current specials" width="1920" height="226" loading="lazy" class="h-full w-full object-contain md:w-auto md:[-webkit-mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)] md:[mask-image:linear-gradient(90deg,transparent,#000_4%,#000_96%,transparent)]"></a>
+      <a href="/specials" class="block h-full w-full"><img src="assets/promos/yokohama-buy3-get1-phone.webp" alt="Buy 3, get 1 free across the whole Yokohama range. Terms and conditions apply. See current specials" width="1080" height="720" loading="lazy" class="h-full w-full object-cover sm:hidden"><img src="assets/promos/yokohama-buy3-get1-1920.webp" srcset="assets/promos/yokohama-buy3-get1-960.webp 960w, assets/promos/yokohama-buy3-get1-1920.webp 1920w" sizes="100vw" alt="Buy 3, get 1 free across the whole Yokohama range. Terms and conditions apply. See current specials" width="1920" height="640" loading="lazy" class="hidden h-full w-full object-cover sm:block"></a>
     </div>
     <!-- Controls: two dots and pause/play, 24px tap targets, bottom right (over the tyre artwork, clear of the offer text) -->
     <div class="absolute bottom-1 right-1.5 flex items-center rounded-full bg-white/85 px-0.5 shadow-sm sm:bottom-2 sm:right-3">
@@ -923,6 +948,65 @@ tailwind.config = {
     </div>
   </div>
 </section>
+<!--
+  Store picker dialog (ohStorePicker). Shared by the homepage and the product pages: output once per page,
+  directly after the header. The trigger buttons live in each header and use the small ohStoreTrigger component,
+  which opens this dialog with the window event `oh-open-store-picker` and shows the chosen store's name.
+
+  It opens by itself the first time a visitor arrives, and never again once they pick a store or close it.
+  The choice lives in localStorage under 'oh-store'. In Hyvä, mirror it into a cookie or customer attribute so
+  the server can use it (default fitting store at checkout, phone in the header, stock by source).
+
+  The 8 stores come from STORES in js/oneills-home.js, so this markup holds no store data of its own.
+  The dialog is position: fixed, so it must not sit inside an element with a transform or filter.
+-->
+<div x-data="ohStorePicker" @keydown.escape.window="close" @oh-open-store-picker.window="show">
+  <div x-show="isOpen" x-cloak class="fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-labelledby="oh-store-picker-title">
+    <div class="absolute inset-0 bg-navy-900/60" @click="close"
+         x-transition:enter="transition-opacity duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
+
+    <div class="absolute inset-x-0 bottom-0 sm:inset-0 sm:flex sm:items-center sm:justify-center sm:p-4">
+      <div x-ref="panel" class="relative max-h-[85vh] w-full overflow-y-auto rounded-t-2xl bg-white p-5 shadow-2xl sm:max-w-3xl sm:rounded-2xl sm:p-7"
+           x-transition:enter="transition duration-200 ease-out" x-transition:enter-start="translate-y-6 opacity-0 sm:translate-y-0 sm:scale-95" x-transition:enter-end="translate-y-0 opacity-100 sm:scale-100"
+           x-transition:leave="transition duration-150 ease-in" x-transition:leave-start="translate-y-0 opacity-100 sm:scale-100" x-transition:leave-end="translate-y-6 opacity-0 sm:translate-y-0 sm:scale-95">
+
+        <div class="flex items-start justify-between gap-4 border-b border-slate-200 pb-4">
+          <div>
+            <h2 id="oh-store-picker-title" class="font-display text-xl font-bold text-navy-900 sm:text-2xl">Choose your store</h2>
+            <p class="mt-1 text-sm text-slate-600">We'll show you the right hours, phone number and fitting times.</p>
+          </div>
+          <button type="button" @click="close" class="-mr-1 -mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-navy-900">
+            <span class="sr-only">Close, and choose a store later</span>
+            <svg class="h-5 w-5" aria-hidden="true"><use href="#i-close"></use></svg>
+          </button>
+        </div>
+
+        <ul class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <template x-for="s in stores" :key="s.key">
+            <li>
+              <button type="button" :data-key="s.key" @click="choose" :class="cardCls[s.key]" :aria-current="current[s.key]"
+                      class="relative flex h-full w-full flex-col items-center justify-center gap-2 rounded-xl border px-2 py-4 text-center">
+                <span x-show="tickShown[s.key]" x-cloak class="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white">
+                  <span class="sr-only">Selected</span>
+                  <svg class="h-3 w-3" aria-hidden="true"><use href="#i-check"></use></svg>
+                </span>
+                <svg class="h-7 w-7 text-brand-600" aria-hidden="true"><use href="#i-store"></use></svg>
+                <span class="text-sm font-semibold leading-tight text-navy-900" x-text="s.name">Store</span>
+                <span class="text-xs text-slate-500" x-text="s.area">Area</span>
+              </button>
+            </li>
+          </template>
+        </ul>
+
+        <p class="mt-5 border-t border-slate-200 pt-4 text-sm text-slate-600">
+          You can change this any time from the top of the page.
+          <a href="/#stores" class="font-semibold text-brand-700 underline-offset-2 hover:underline">Compare all 8 stores</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 <!--
   O'Neills Tyre & Autocare homepage content (everything between header and footer).
   Requires: icons.html sprite on the page, js/oneills-home.js (Alpine components), brand Tailwind tokens.
@@ -937,7 +1021,7 @@ tailwind.config = {
     <img src="https://images.unsplash.com/photo-1714496438846-2e27f541ca95?auto=format&amp;fit=crop&amp;w=1600&amp;q=70" srcset="https://images.unsplash.com/photo-1714496438846-2e27f541ca95?auto=format&amp;fit=crop&amp;w=800&amp;q=70 800w, https://images.unsplash.com/photo-1714496438846-2e27f541ca95?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w" sizes="100vw" alt="Red 4x4 ute kicking up dust on a rough dirt track" width="1600" height="1064" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover object-center">
     <div class="absolute inset-0 bg-navy-900/85 lg:bg-transparent lg:bg-gradient-to-r lg:from-navy-900/95 lg:via-navy-900/85 lg:to-navy-900/45" aria-hidden="true"></div>
 
-    <div class="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 py-8 sm:py-16 lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-x-16 lg:px-6 lg:py-28">
+    <div class="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 py-6 sm:py-12 lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-x-16 lg:px-6 lg:py-16">
       <!-- Intro -->
       <div>
         <a href="#reviews" class="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-white/10 py-1.5 pl-1.5 pr-3.5 text-[13px] ring-1 ring-inset ring-white/20 hover:bg-white/15 sm:text-sm">
@@ -2464,14 +2548,14 @@ tailwind.config = {
   // Hours are minutes from midnight, Australia/Sydney time. Public holidays are not handled.
   // lat/lng are approximate suburb positions; replace with exact Google Business Profile coordinates.
   var STORES = {
-    broadmeadow: { name: 'Broadmeadow',    week: [450, 1020], sat: [480, 720], lat: -32.924, lng: 151.735 },
-    beresfield:  { name: 'Beresfield TME', week: [420, 1020], sat: [450, 690], lat: -32.800, lng: 151.656 },
-    gateshead:   { name: 'Gateshead',      week: [450, 1020], sat: [480, 690], lat: -32.983, lng: 151.689 },
-    warnersBay:  { name: 'Warners Bay',    week: [450, 1020], sat: [480, 690], lat: -32.969, lng: 151.646 },
-    belmont:     { name: 'Belmont',        week: [450, 1020], sat: [480, 690], lat: -33.034, lng: 151.660 },
-    morisset:    { name: 'Morisset',       week: [450, 1020], sat: [480, 690], lat: -33.108, lng: 151.488 },
-    kurriKurri:  { name: 'Kurri Kurri',    week: [450, 1020], sat: [480, 690], lat: -32.819, lng: 151.480 },
-    cessnock:    { name: 'Cessnock',       week: [450, 1020], sat: [480, 690], lat: -32.834, lng: 151.356 }
+    broadmeadow: { name: 'Broadmeadow',    slug: 'broadmeadow',  area: 'Newcastle',     week: [450, 1020], sat: [480, 720], lat: -32.924, lng: 151.735 },
+    beresfield:  { name: 'Beresfield TME', slug: 'beresfield',   area: 'Newcastle',     week: [420, 1020], sat: [450, 690], lat: -32.800, lng: 151.656 },
+    gateshead:   { name: 'Gateshead',      slug: 'gateshead',    area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -32.983, lng: 151.689 },
+    warnersBay:  { name: 'Warners Bay',    slug: 'warners-bay',  area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -32.969, lng: 151.646 },
+    belmont:     { name: 'Belmont',        slug: 'belmont',      area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -33.034, lng: 151.660 },
+    morisset:    { name: 'Morisset',       slug: 'morisset',     area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -33.108, lng: 151.488 },
+    kurriKurri:  { name: 'Kurri Kurri',    slug: 'kurri-kurri',  area: 'Hunter Valley', week: [450, 1020], sat: [480, 690], lat: -32.819, lng: 151.480 },
+    cessnock:    { name: 'Cessnock',       slug: 'cessnock',     area: 'Hunter Valley', week: [450, 1020], sat: [480, 690], lat: -32.834, lng: 151.356 }
   };
   var STORE_KEYS = Object.keys(STORES);
 
@@ -2532,6 +2616,93 @@ tailwind.config = {
         toggleDrawer: function () { this.drawerOpen = !this.drawerOpen; },
         closeDrawer: function () { this.drawerOpen = false; },
         openCall: function () { this.drawerOpen = false; this.$dispatch('oh-open-call'); }
+      };
+    });
+
+    // Store picker: a small dialog offering the 8 stores, shown once to a new visitor so the site can be
+    // tailored to their store. The choice is kept in localStorage under 'oh-store' (the key, e.g. "broadmeadow").
+    // Closing without choosing sets 'oh-store-dismissed' so the visitor is not asked again.
+    // Dev: read the same value server side (cookie or customer attribute) to default the fitting store at
+    // checkout, the phone number in the header, and stock by source. Nothing here changes prices.
+    Alpine.data('ohStorePicker', function () {
+      var CHOSEN = 'oh-store', DISMISSED = 'oh-store-dismissed';
+      function read(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
+      function write(k, v) { try { window.localStorage.setItem(k, v); } catch (e) { /* private window */ } }
+      return {
+        isOpen: false, chosen: '',
+        stores: STORE_KEYS.map(function (k) {
+          return { key: k, name: STORES[k].name, area: STORES[k].area, slug: STORES[k].slug };
+        }),
+        init: function () {
+          var self = this, saved = read(CHOSEN);
+          if (saved && STORES[saved]) { this.chosen = saved; }
+          // ask once: only when nothing is stored and the visitor has not dismissed it before
+          if (!this.chosen && !read(DISMISSED)) {
+            setTimeout(function () { self.show(); }, 400);   // let the page paint first
+          }
+        },
+        get hasChosen() { return this.chosen !== ''; },
+        get chosenName() { return this.chosen && STORES[this.chosen] ? STORES[this.chosen].name : ''; },
+        get triggerLabel() { return this.hasChosen ? 'Your store: ' + this.chosenName : 'Choose your store'; },
+        get tickShown() {
+          var c = this.chosen, o = {};
+          STORE_KEYS.forEach(function (k) { o[k] = k === c; });
+          return o;
+        },
+        get cardCls() {
+          var c = this.chosen, o = {};
+          STORE_KEYS.forEach(function (k) {
+            o[k] = k === c ? 'border-brand-600 bg-brand-50 ring-1 ring-brand-600'
+                           : 'border-slate-200 bg-white hover:border-brand-400 hover:bg-brand-50/40';
+          });
+          return o;
+        },
+        get current() {
+          var c = this.chosen, o = {};
+          STORE_KEYS.forEach(function (k) { o[k] = k === c ? 'true' : null; });
+          return o;
+        },
+        show: function () {
+          var self = this;
+          this.isOpen = true;
+          this.$nextTick(function () {
+            var first = self.$refs.panel && self.$refs.panel.querySelector('[data-key], button');
+            if (first) { first.focus({ preventScroll: true }); }
+          });
+        },
+        close: function () {
+          if (!this.isOpen) return;
+          this.isOpen = false;
+          if (!this.hasChosen) { write(DISMISSED, '1'); }   // asked once, do not nag
+        },
+        choose: function (e) {
+          var k = e.currentTarget.dataset.key;
+          if (!STORES[k]) return;
+          this.chosen = k;
+          write(CHOSEN, k);
+          this.isOpen = false;
+          this.$dispatch('oh-store-chosen');
+        }
+      };
+    });
+
+    // Trigger for the store picker, used in both headers. Reads the same saved choice so the label can show it,
+    // and asks the dialog to open with a window event (the dialog lives outside the header's component).
+    Alpine.data('ohStoreTrigger', function () {
+      return {
+        name: '',
+        init: function () {
+          var self = this;
+          this.read();
+          window.addEventListener('oh-store-chosen', function () { self.read(); });
+        },
+        read: function () {
+          var k = null;
+          try { k = window.localStorage.getItem('oh-store'); } catch (e) { k = null; }
+          this.name = k && STORES[k] ? STORES[k].name : '';
+        },
+        get label() { return this.name ? 'Your store: ' + this.name : 'Choose your store'; },
+        open: function () { this.$dispatch('oh-open-store-picker'); }
       };
     });
 

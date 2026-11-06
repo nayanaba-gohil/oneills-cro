@@ -1,0 +1,293 @@
+<!-- Pay Later Information Modal: native dialog with tabs for Afterpay, Zip and humm -->
+<div x-data="ohPayLater" @oh-paylater.window="open($event.detail && $event.detail.tab ? $event.detail.tab : 'afterpay')">
+  <dialog x-ref="dlg" role="dialog" aria-labelledby="paylater-title" @click.self="close()" onclick="if (event.target === this) this.close();" @close="onClose" class="[&:not([open])]:hidden m-0 mt-auto max-h-[92vh] w-full max-w-none overflow-hidden rounded-t-2xl border-0 bg-white p-0 text-slate-700 shadow-2xl backdrop:bg-navy-900/60 sm:m-auto sm:w-[42rem] sm:max-w-2xl sm:rounded-2xl">
+    <div class="flex flex-col h-[88vh] sm:h-[630px] max-h-[92vh] w-full overflow-hidden">
+      <!-- Header with Tabs and Close Button: fixed height -->
+    <div class="shrink-0 flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 sm:px-6 pt-2">
+      <div class="flex items-center gap-1 sm:gap-2 min-w-0 overflow-x-auto">
+        <button type="button" @click="setTab('afterpay')" :class="tab === 'afterpay' ? 'border-b-2 border-emerald-500 bg-white font-bold text-navy-900 shadow-xs' : 'border-b-2 border-transparent text-slate-500 hover:text-slate-800'" class="flex items-center gap-2 rounded-t-xl px-3 sm:px-4 py-3 text-sm transition shrink-0">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#b2fce4] border border-emerald-500"></span>
+          <span>Afterpay</span>
+        </button>
+        <button type="button" @click="setTab('zip')" :class="tab === 'zip' ? 'border-b-2 border-[#7b51db] bg-white font-bold text-navy-900 shadow-xs' : 'border-b-2 border-transparent text-slate-500 hover:text-slate-800'" class="flex items-center gap-2 rounded-t-xl px-3 sm:px-4 py-3 text-sm transition shrink-0">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#9d80ff]"></span>
+          <span>Zip</span>
+        </button>
+        <button type="button" @click="setTab('humm')" :class="tab === 'humm' ? 'border-b-2 border-[#FF6C00] bg-white font-bold text-navy-900 shadow-xs' : 'border-b-2 border-transparent text-slate-500 hover:text-slate-800'" class="flex items-center gap-2 rounded-t-xl px-3 sm:px-4 py-3 text-sm transition shrink-0">
+          <span class="h-2.5 w-2.5 rounded-full bg-[#FF6C00]"></span>
+          <span>humm</span>
+        </button>
+      </div>
+      <button type="button" 
+              @click.stop="close()" 
+              onclick="var d = this.closest('dialog'); if (d) d.close();" 
+              aria-label="Close" 
+              class="relative z-20 -mr-2 flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-slate-500 transition hover:bg-slate-200 hover:text-navy-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-600">
+        <svg class="pointer-events-none h-5 w-5" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </div>
+
+    <!-- Content panels container with locked dimensions -->
+    <div class="flex-1 overflow-y-auto">
+      <!-- TAB 1: AFTERPAY -->
+      <div x-show="tab === 'afterpay'" class="p-6 sm:p-8 flex flex-col justify-between min-h-full">
+      <div class="text-center">
+        <!-- Mint pill with afterpay logo -->
+        <div class="inline-flex items-center justify-center rounded-full bg-[#b2fce4] px-8 py-3.5 shadow-xs">
+          <svg class="h-5 w-28 text-slate-950" role="img" aria-label="Afterpay"><use href="#pay-afterpay"></use></svg>
+        </div>
+
+        <h2 id="paylater-title" class="mt-6 font-display text-2xl font-black uppercase tracking-tight text-navy-900 sm:text-3xl leading-snug">
+          BUY NOW, PAY IT IN 4<br>INTEREST-FREE INSTALMENTS
+        </h2>
+      </div>
+
+      <!-- 3 Steps -->
+      <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-4 text-center">
+        <div class="flex flex-col items-center">
+          <div class="flex h-14 w-14 items-center justify-center text-navy-900 mb-2">
+            <!-- Two looping afterpay arrows -->
+            <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 16l-4-4 4-4"/>
+              <path d="M3 12h14a4 4 0 0 1 4 4v1"/>
+              <path d="M17 8l4 4-4 4"/>
+              <path d="M21 12H7a4 4 0 0 1-4-4V7"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-sm uppercase tracking-wide text-navy-900">CHOOSE AFTERPAY</h3>
+          <p class="mt-1 text-sm text-slate-600">At checkout.</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="flex h-14 w-14 items-center justify-center text-navy-900 mb-2">
+            <!-- User avatar icon -->
+            <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-sm uppercase tracking-wide text-navy-900">LOGIN OR SIGN UP</h3>
+          <p class="mt-1 text-sm text-slate-600">Free and simple to apply.</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="flex h-14 w-14 items-center justify-center text-navy-900 mb-2">
+            <!-- Payment card with dot icon -->
+            <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="3"/>
+              <circle cx="17" cy="14" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-sm uppercase tracking-wide text-navy-900">PAY IT IN 4</h3>
+          <p class="mt-1 text-sm text-slate-600">Approx every 2 weeks.</p>
+        </div>
+      </div>
+
+      <!-- Legal disclaimer -->
+      <div class="mt-8 border-t border-slate-100 pt-5 text-center space-y-2">
+        <p class="text-[10px] uppercase tracking-wider text-slate-400 font-mono leading-relaxed max-w-xl mx-auto">
+          SEE YOUR PAYMENT SCHEDULE FOR FULL BREAKDOWN OF YOUR INSTALMENTS AND DUE DATES IN THE AFTERPAY APP OR WEB PORTAL AFTER YOU CHECK OUT. YOUR INSTALMENTS AND DUE DATES WILL TAKE INTO ACCOUNT YOUR PREFERRED PAYMENT DATE, AND WHETHER NO PAYMENT UPFRONT OR HIGHER UPFRONT PAYMENT APPLIES.
+        </p>
+        <p class="text-[10px] uppercase tracking-wider text-slate-400 font-mono">
+          LATE FEES, ELIGIBILITY CRITERIA AND T&amp;CS APPLY. AUSTRALIAN CREDIT LICENCE 527911.
+        </p>
+      </div>
+    </div>
+
+    <!-- TAB 2: ZIP -->
+    <div x-show="tab === 'zip'" class="overflow-hidden">
+      <!-- Dark purple header banner -->
+      <div class="relative bg-[#17072B] px-6 py-6 sm:px-8 text-white overflow-hidden">
+        <div class="absolute right-0 top-0 bottom-0 w-2/5 bg-[#9d80ff]/80 [clip-path:polygon(35%_0,100%_0,100%_100%,0%_100%)] pointer-events-none"></div>
+        <div class="relative z-10">
+          <div class="flex items-center gap-2">
+            <svg class="h-6 w-14 text-white" role="img" aria-label="Zip"><use href="#pay-zip"></use></svg>
+          </div>
+          <h2 class="mt-3 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            The better way to pay
+          </h2>
+          <p class="mt-1 text-sm text-purple-200">
+            Make it easier to pay for your purchases
+          </p>
+          <div class="mt-3 flex items-center gap-2 text-xs font-medium text-purple-200">
+            <svg class="h-3.5 w-8 text-white"><use href="#pay-zip"></use></svg>
+            <span class="font-bold text-white">4.9</span>
+            <span class="flex text-purple-300">
+              <svg class="h-3 w-3 fill-current"><use href="#i-star"></use></svg>
+              <svg class="h-3 w-3 fill-current"><use href="#i-star"></use></svg>
+              <svg class="h-3 w-3 fill-current"><use href="#i-star"></use></svg>
+              <svg class="h-3 w-3 fill-current"><use href="#i-star"></use></svg>
+              <svg class="h-3 w-3 fill-current"><use href="#i-star"></use></svg>
+            </span>
+            <span>App store rating</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two Zip columns -->
+      <div class="grid grid-cols-1 divide-y divide-slate-100 sm:grid-cols-2 sm:divide-x sm:divide-y-0 p-6 sm:p-8 gap-6 sm:gap-8">
+        <!-- zip PAY -->
+        <div class="flex flex-col justify-between space-y-5">
+          <div>
+            <div class="flex items-center gap-1.5 text-xl font-black">
+              <span class="text-navy-900">zip</span>
+              <span class="text-[#9d80ff]">PAY</span>
+            </div>
+            <ul class="mt-4 space-y-3 text-sm text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span>Up to <strong class="text-navy-900 font-bold">$1,000</strong> credit limit</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span>Pay <strong class="text-navy-900 font-bold">nothing today</strong></span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span>Always <strong class="text-navy-900 font-bold">interest free^</strong></span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span><strong class="text-navy-900 font-bold">Spread repayments</strong> over a month or longer</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span><strong class="text-navy-900 font-bold">$9.95/mth</strong> account fee or $0 if nothing owing</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://zip.co/au" target="_blank" rel="noopener noreferrer" class="flex h-11 w-full items-center justify-center rounded-xl bg-[#2A1150] px-4 text-sm font-semibold text-white transition hover:bg-[#3d1a73]">
+            Apply now
+          </a>
+        </div>
+
+        <!-- zip MONEY -->
+        <div class="flex flex-col justify-between space-y-5 sm:pl-8">
+          <div>
+            <div class="flex items-center gap-1.5 text-xl font-black">
+              <span class="text-navy-900">zip</span>
+              <span class="text-[#9d80ff]">MONEY</span>
+            </div>
+            <ul class="mt-4 space-y-3 text-sm text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span>Apply for <strong class="text-navy-900 font-bold">$1,000 - $5,000</strong> credit limit</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span>Pay <strong class="text-navy-900 font-bold">nothing today</strong></span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span>Up to <strong class="text-navy-900 font-bold">6 months</strong> interest free*</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span><strong class="text-navy-900 font-bold">$9.95/mth</strong> account fee or $0 if nothing owing</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#9d80ff]" aria-hidden="true"></span>
+                <span><strong class="text-navy-900 font-bold">One off</strong> establishment fee up to $99 may apply</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://zip.co/au" target="_blank" rel="noopener noreferrer" class="flex h-11 w-full items-center justify-center rounded-xl bg-[#2A1150] px-4 text-sm font-semibold text-white transition hover:bg-[#3d1a73]">
+            Apply now
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: HUMM -->
+    <div x-show="tab === 'humm'" class="overflow-hidden">
+      <!-- Orange header banner -->
+      <div class="bg-[#FF6C00] px-6 py-6 sm:px-8 text-white">
+        <div class="flex items-center gap-2">
+          <svg class="h-6 w-20 text-white fill-white" role="img" aria-label="humm"><use href="#pay-humm"></use></svg>
+        </div>
+        <h2 class="mt-3 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          No interest ever. That's the humm way.
+        </h2>
+        <p class="mt-1 text-sm text-orange-100">
+          Spread the cost of your tyres, wheels and servicing across easy slices.
+        </p>
+      </div>
+
+      <!-- Two humm columns -->
+      <div class="grid grid-cols-1 divide-y divide-slate-100 sm:grid-cols-2 sm:divide-x sm:divide-y-0 p-6 sm:p-8 gap-6 sm:gap-8">
+        <!-- Little things -->
+        <div class="flex flex-col justify-between space-y-5">
+          <div>
+            <div class="flex items-center gap-2 text-xl font-bold text-navy-900">
+              <span class="rounded bg-orange-100 px-2.5 py-0.5 text-xs font-semibold text-[#FF6C00]">Up to $2,000</span>
+              <span>Little things</span>
+            </div>
+            <ul class="mt-4 space-y-3 text-sm text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Up to <strong class="text-navy-900 font-bold">$2,000</strong> purchase amount</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Pay in <strong class="text-navy-900 font-bold">5 or 10 slices</strong> (weekly or fortnightly)</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Always <strong class="text-navy-900 font-bold">0% interest</strong></span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Fast digital approval via the humm app</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span><strong class="text-navy-900 font-bold">$0 account fee</strong> when repaid on time</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://www.shophumm.com/au/" target="_blank" rel="noopener noreferrer" class="flex h-11 w-full items-center justify-center rounded-xl bg-[#FF6C00] px-4 text-sm font-semibold text-white transition hover:bg-[#E05F00]">
+            Apply now
+          </a>
+        </div>
+
+        <!-- Big things -->
+        <div class="flex flex-col justify-between space-y-5 sm:pl-8">
+          <div>
+            <div class="flex items-center gap-2 text-xl font-bold text-navy-900">
+              <span class="rounded bg-orange-100 px-2.5 py-0.5 text-xs font-semibold text-[#FF6C00]">Up to $10,000</span>
+              <span>Big things</span>
+            </div>
+            <ul class="mt-4 space-y-3 text-sm text-slate-700">
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Apply for <strong class="text-navy-900 font-bold">$1,000 - $10,000</strong> credit limit</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Repay over <strong class="text-navy-900 font-bold">6, 12, or 24 months</strong></span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span><strong class="text-navy-900 font-bold">No interest</strong> during promotional terms</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Ideal for full tyre sets, wheel packages &amp; mechanical</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="mt-1 h-3 w-3 shrink-0 rounded-xs bg-[#FF6C00]" aria-hidden="true"></span>
+                <span>Pre-approval online in minutes</span>
+              </li>
+            </ul>
+          </div>
+          <a href="https://www.shophumm.com/au/" target="_blank" rel="noopener noreferrer" class="flex h-11 w-full items-center justify-center rounded-xl bg-[#FF6C00] px-4 text-sm font-semibold text-white transition hover:bg-[#E05F00]">
+            Apply now
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+  </dialog>
+</div>

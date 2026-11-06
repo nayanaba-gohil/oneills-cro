@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Tyre tread illustration (placeholder)">
+<rect width="400" height="400" fill="#111827"/>
+<rect x="92" y="0" width="10" height="400" fill="#030712"/>
+<rect x="195" y="0" width="10" height="400" fill="#030712"/>
+<rect x="298" y="0" width="10" height="400" fill="#030712"/>
+<path d="M6 8 L91 24 L91 42 L6 26 Z" fill="#374151"/>
+<path d="M107 24 L193 8 L193 26 L107 42 Z" fill="#4b5563"/>
+<path d="M207 8 L293 24 L293 42 L207 26 Z" fill="#4b5563"/>
+<path d="M309 24 L394 8 L394 26 L309 42 Z" fill="#374151"/>
+<path d="M6 58 L91 74 L91 92 L6 76 Z" fill="#374151"/>
+<path d="M107 74 L193 58 L193 76 L107 92 Z" fill="#4b5563"/>
+<path d="M207 58 L293 74 L293 92 L207 76 Z" fill="#4b5563"/>
+<path d="M309 74 L394 58 L394 76 L309 92 Z" fill="#374151"/>
+<path d="M6 108 L91 124 L91 142 L6 126 Z" fill="#374151"/>
+<path d="M107 124 L193 108 L193 126 L107 142 Z" fill="#4b5563"/>
+<path d="M207 108 L293 124 L293 142 L207 126 Z" fill="#4b5563"/>
+<path d="M309 124 L394 108 L394 126 L309 142 Z" fill="#374151"/>
+<path d="M6 158 L91 174 L91 192 L6 176 Z" fill="#374151"/>
+<path d="M107 174 L193 158 L193 176 L107 192 Z" fill="#4b5563"/>
+<path d="M207 158 L293 174 L293 192 L207 176 Z" fill="#4b5563"/>
+<path d="M309 174 L394 158 L394 176 L309 192 Z" fill="#374151"/>
+<path d="M6 208 L91 224 L91 242 L6 226 Z" fill="#374151"/>
+<path d="M107 224 L193 208 L193 226 L107 242 Z" fill="#4b5563"/>
+<path d="M207 208 L293 224 L293 242 L207 226 Z" fill="#4b5563"/>
+<path d="M309 224 L394 208 L394 226 L309 242 Z" fill="#374151"/>
+<path d="M6 258 L91 274 L91 292 L6 276 Z" fill="#374151"/>
+<path d="M107 274 L193 258 L193 276 L107 292 Z" fill="#4b5563"/>
+<path d="M207 258 L293 274 L293 292 L207 276 Z" fill="#4b5563"/>
+<path d="M309 274 L394 258 L394 276 L309 292 Z" fill="#374151"/>
+<path d="M6 308 L91 324 L91 342 L6 326 Z" fill="#374151"/>
+<path d="M107 324 L193 308 L193 326 L107 342 Z" fill="#4b5563"/>
+<path d="M207 308 L293 324 L293 342 L207 326 Z" fill="#4b5563"/>
+<path d="M309 324 L394 308 L394 326 L309 342 Z" fill="#374151"/>
+<path d="M6 358 L91 374 L91 392 L6 376 Z" fill="#374151"/>
+<path d="M107 374 L193 358 L193 376 L107 392 Z" fill="#4b5563"/>
+<path d="M207 358 L293 374 L293 392 L207 376 Z" fill="#4b5563"/>
+<path d="M309 374 L394 358 L394 376 L309 392 Z" fill="#374151"/>
+</svg>

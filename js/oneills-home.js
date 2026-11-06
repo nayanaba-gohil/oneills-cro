@@ -11,14 +11,14 @@
   // Hours are minutes from midnight, Australia/Sydney time. Public holidays are not handled.
   // lat/lng are approximate suburb positions; replace with exact Google Business Profile coordinates.
   var STORES = {
-    broadmeadow: { name: 'Broadmeadow',    week: [450, 1020], sat: [480, 720], lat: -32.924, lng: 151.735 },
-    beresfield:  { name: 'Beresfield TME', week: [420, 1020], sat: [450, 690], lat: -32.800, lng: 151.656 },
-    gateshead:   { name: 'Gateshead',      week: [450, 1020], sat: [480, 690], lat: -32.983, lng: 151.689 },
-    warnersBay:  { name: 'Warners Bay',    week: [450, 1020], sat: [480, 690], lat: -32.969, lng: 151.646 },
-    belmont:     { name: 'Belmont',        week: [450, 1020], sat: [480, 690], lat: -33.034, lng: 151.660 },
-    morisset:    { name: 'Morisset',       week: [450, 1020], sat: [480, 690], lat: -33.108, lng: 151.488 },
-    kurriKurri:  { name: 'Kurri Kurri',    week: [450, 1020], sat: [480, 690], lat: -32.819, lng: 151.480 },
-    cessnock:    { name: 'Cessnock',       week: [450, 1020], sat: [480, 690], lat: -32.834, lng: 151.356 }
+    broadmeadow: { name: 'Broadmeadow',    slug: 'broadmeadow',  area: 'Newcastle',     week: [450, 1020], sat: [480, 720], lat: -32.924, lng: 151.735 },
+    beresfield:  { name: 'Beresfield TME', slug: 'beresfield',   area: 'Newcastle',     week: [420, 1020], sat: [450, 690], lat: -32.800, lng: 151.656 },
+    gateshead:   { name: 'Gateshead',      slug: 'gateshead',    area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -32.983, lng: 151.689 },
+    warnersBay:  { name: 'Warners Bay',    slug: 'warners-bay',  area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -32.969, lng: 151.646 },
+    belmont:     { name: 'Belmont',        slug: 'belmont',      area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -33.034, lng: 151.660 },
+    morisset:    { name: 'Morisset',       slug: 'morisset',     area: 'Lake Macquarie', week: [450, 1020], sat: [480, 690], lat: -33.108, lng: 151.488 },
+    kurriKurri:  { name: 'Kurri Kurri',    slug: 'kurri-kurri',  area: 'Hunter Valley', week: [450, 1020], sat: [480, 690], lat: -32.819, lng: 151.480 },
+    cessnock:    { name: 'Cessnock',       slug: 'cessnock',     area: 'Hunter Valley', week: [450, 1020], sat: [480, 690], lat: -32.834, lng: 151.356 }
   };
   var STORE_KEYS = Object.keys(STORES);
 
@@ -79,6 +79,93 @@
         toggleDrawer: function () { this.drawerOpen = !this.drawerOpen; },
         closeDrawer: function () { this.drawerOpen = false; },
         openCall: function () { this.drawerOpen = false; this.$dispatch('oh-open-call'); }
+      };
+    });
+
+    // Store picker: a small dialog offering the 8 stores, shown once to a new visitor so the site can be
+    // tailored to their store. The choice is kept in localStorage under 'oh-store' (the key, e.g. "broadmeadow").
+    // Closing without choosing sets 'oh-store-dismissed' so the visitor is not asked again.
+    // Dev: read the same value server side (cookie or customer attribute) to default the fitting store at
+    // checkout, the phone number in the header, and stock by source. Nothing here changes prices.
+    Alpine.data('ohStorePicker', function () {
+      var CHOSEN = 'oh-store', DISMISSED = 'oh-store-dismissed';
+      function read(k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } }
+      function write(k, v) { try { window.localStorage.setItem(k, v); } catch (e) { /* private window */ } }
+      return {
+        isOpen: false, chosen: '',
+        stores: STORE_KEYS.map(function (k) {
+          return { key: k, name: STORES[k].name, area: STORES[k].area, slug: STORES[k].slug };
+        }),
+        init: function () {
+          var self = this, saved = read(CHOSEN);
+          if (saved && STORES[saved]) { this.chosen = saved; }
+          // ask once: only when nothing is stored and the visitor has not dismissed it before
+          if (!this.chosen && !read(DISMISSED)) {
+            setTimeout(function () { self.show(); }, 400);   // let the page paint first
+          }
+        },
+        get hasChosen() { return this.chosen !== ''; },
+        get chosenName() { return this.chosen && STORES[this.chosen] ? STORES[this.chosen].name : ''; },
+        get triggerLabel() { return this.hasChosen ? 'Your store: ' + this.chosenName : 'Choose your store'; },
+        get tickShown() {
+          var c = this.chosen, o = {};
+          STORE_KEYS.forEach(function (k) { o[k] = k === c; });
+          return o;
+        },
+        get cardCls() {
+          var c = this.chosen, o = {};
+          STORE_KEYS.forEach(function (k) {
+            o[k] = k === c ? 'border-brand-600 bg-brand-50 ring-1 ring-brand-600'
+                           : 'border-slate-200 bg-white hover:border-brand-400 hover:bg-brand-50/40';
+          });
+          return o;
+        },
+        get current() {
+          var c = this.chosen, o = {};
+          STORE_KEYS.forEach(function (k) { o[k] = k === c ? 'true' : null; });
+          return o;
+        },
+        show: function () {
+          var self = this;
+          this.isOpen = true;
+          this.$nextTick(function () {
+            var first = self.$refs.panel && self.$refs.panel.querySelector('[data-key], button');
+            if (first) { first.focus({ preventScroll: true }); }
+          });
+        },
+        close: function () {
+          if (!this.isOpen) return;
+          this.isOpen = false;
+          if (!this.hasChosen) { write(DISMISSED, '1'); }   // asked once, do not nag
+        },
+        choose: function (e) {
+          var k = e.currentTarget.dataset.key;
+          if (!STORES[k]) return;
+          this.chosen = k;
+          write(CHOSEN, k);
+          this.isOpen = false;
+          this.$dispatch('oh-store-chosen');
+        }
+      };
+    });
+
+    // Trigger for the store picker, used in both headers. Reads the same saved choice so the label can show it,
+    // and asks the dialog to open with a window event (the dialog lives outside the header's component).
+    Alpine.data('ohStoreTrigger', function () {
+      return {
+        name: '',
+        init: function () {
+          var self = this;
+          this.read();
+          window.addEventListener('oh-store-chosen', function () { self.read(); });
+        },
+        read: function () {
+          var k = null;
+          try { k = window.localStorage.getItem('oh-store'); } catch (e) { k = null; }
+          this.name = k && STORES[k] ? STORES[k].name : '';
+        },
+        get label() { return this.name ? 'Your store: ' + this.name : 'Choose your store'; },
+        open: function () { this.$dispatch('oh-open-store-picker'); }
       };
     });
 
