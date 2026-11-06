@@ -41,7 +41,7 @@ PAGES = [
     title_name="Yokohama ADVAN A052", pm=("Yokohama ADVAN A052", "A052-1856013", "185/60R13 80V"),
     desc="Yokohama ADVAN A052 street-legal motorsport tyre. Free fitting, balancing and eco tyre disposal at 8 O'Neills stores."),
   dict(  # Wheel: empty reviews, single image, no promotion, finish/size options
-    content='src/product-content-wheel.html', schema='schema/product-jsonld-wheel.html', out='wheels.html', aggregate=True, wheel=True, carousel=False,
+    content='src/product-content-wheel.html', schema='schema/product-jsonld-wheel.html', out='wheel.html', aggregate=True, wheel=True, carousel=False,
     product=dict(
       name="ROH Apollo 4WD wheel", url=B + "/apollo", model="Apollo", gtin13=None, mpn=None,
       sku=None,   # parent SKU of the configurable product: output it when Magento has one (children carry the APO... SKUs)
@@ -242,8 +242,6 @@ dialog:not([open]){{display:none!important}}
     tail = ('<script>\n' + r(HOME, 'js/oneills-home.js') + '</script>\n<script>\n' + r(P, 'js/oneills-pdp.js') + '</script>\n'
             '<!-- PREVIEW ONLY: Alpine is already loaded by Hyvä. -->\n<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>\n</body>\n</html>\n')
     (P / pg['out']).write_text(head + body + tail)
-    if pg['out'] == 'wheels.html':
-        (P / 'wheel.html').write_text(head + body + tail)
     print('built', pg['out'], (P / pg['out']).stat().st_size, 'bytes;', len(faq), 'FAQs in schema;', pg['schema'])
 
 # Build only the two required product pages: tyres.html and wheel.html
